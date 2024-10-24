@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<windowclass name="item" merge="join">
+		<script>
+			function onInit()
+				if super and super.onInit then
+					super.onInit();
+				end
+				local nodeRecord = self.getDatabaseNode();
+				local isIdentifiedPath = nodeRecord.getPath("isidentified");
+				DB.addHandler(isIdentifiedPath, "onUpdate", onIdentifiedChanged);
+				update(DB.getValue(isIdentifiedPath) ~= 0);
+			end
+			function onClose()
+				local nodeRecord = self.getDatabaseNode();
+				DB.removeHandler(nodeRecord.getPath("isidentified"), "onUpdate", onIdentifiedChanged);
+				if super and super.onClose then
+					super.onClose();
+				end
+			end
+			function onIdentifiedChanged(nodeIdentified)
+				local bIdentified = nodeIdentified.getValue() ~= 0;
+				update(bIdentified);
+			end
+			function update(bIdentified)
+				if bIdentified or Session.IsHost then
+					self.tabs.replaceTabClassByName("actions","item_actions");
+				else
+					self.tabs.replaceTabClassByName("actions","empty_item_actions");
+				end
+			end
+		</script>
+		<tab merge="add">
+			<name>actions</name>
+			<icon>tab_actions</icon>
+			<subwindow>actions</subwindow>
+			<resource>tab_actions</resource>
+			<class>item_actions</class>
+			<embed />
+		</tab>
+	</windowclass>
+
+	<windowclass name="item_header" merge="join">
+		<sheetdata>
+			<stringcontrol name="count" insertbefore="name">
+				<script>
+					function onInit()
+						local node = window.getDatabaseNode().getChild("count");
+						if node then
+							setVisible(true);
+							update(node);
+							DB.addHandler(node.getPath(), "onUpdate", update);
+						end
+					end
+					function onClose()
+						local node = window.getDatabaseNode().getChild("count");
+						if node then
+							DB.removeHandler(node.getPath(), "onUpdate", update);
+						end
+					end
+					function update(node)
+						setValue(string.format("(x%s)", node.getValue()));
+					end
+				</script>
+				<anchored width="40" height="20">
+					<top offset="5" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<font>sheetlabel</font>
+				<nodrag />
+				<readonly />
+				<invisible />
+			</stringcontrol>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="empty_item_actions" />
+
+	<windowclass name="item_actions">
+		<script file="campaign/scripts/item_actions.lua" />
+		<sheetdata>
+			<label_itemframetop name="powerstitle">
+				<anchored height="20">
+					<top offset="10" />
+					<left offset="15" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="char_label_powers" />
+				<icons>char_powers</icons>
+				<target>powerlist</target>
+			</label_itemframetop>
+
+			<button_iedit name="powerlist_iedit">
+				<anchored to="powerstitle" position="insidetopright" offset="0,0" />
+				<target>powerlist</target>
+			</button_iedit>
+			<button_iadd name="powerlist_iadd">
+				<anchored to="powerlist_iedit" position="lefthigh" offset="5,0" />
+				<target>powerlist</target>
+			</button_iadd>
+
+			<windowlist name="powerlist">
+				<script file="campaign/scripts/powerlist.lua" />
+				<anchored>
+					<top parent="powerstitle" anchor="bottom" offset="5" />
+					<left offset="5" />
+					<right offset="-5" />
+				</anchored>
+				<datasource>.powers</datasource>
+				<class>item_power</class>
+				<skipempty />
+				<noscroll />
+				<allowcreate />
+				<allowdelete />
+				<footer>footer_wide</footer>
+			</windowlist>
+
+			<label_itemframetop name="chargestitle">
+				<anchored height="20">
+					<top parent="powerlist" anchor="bottom" offset="10" />
+					<left offset="15" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="item_label_charges" />
+				<icons>char_powers</icons>
+				<target>charges</target>
+			</label_itemframetop>
+
+			<subwindow name="charges">
+				<class>item_charges</class>
+				<anchored>
+					<top parent="chargestitle" anchor="bottom" offset="5" />
+					<left offset="5" />
+					<right offset="-5" />
+				</anchored>
+				<activate />
+				<fastinit />
+			</subwindow>
+
+			<label_itemframetop name="miscstitle">
+				<anchored height="20">
+					<top parent="charges" anchor="bottom" offset="10" />
+					<left offset="15" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="item_label_miscellaneous" />
+				<icons>char_notes</icons>
+				<target>miscellaneous</target>
+			</label_itemframetop>
+			<subwindow name="miscellaneous">
+				<class>item_general</class>
+				<anchored>
+					<top parent="miscstitle" anchor="bottom" offset="5" />
+					<left offset="5" />
+					<right offset="-5" />
+				</anchored>
+				<activate />
+				<fastinit />
+			</subwindow>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="item_general">
+		<margins control="0,0,0,5" />
+		<script file="campaign/scripts/item_general.lua"/>
+		<sheetdata>
+			<label name="label_displaygroup">
+				<anchored position="insidetopleft" width="90" offset="5,2" />
+				<static textres="item_label_display_group" />
+			</label>
+			<simplestring name="displaygroup">
+				<anchored to="label_displaygroup" height="20">
+					<left anchor="right" offset="5" />
+					<top />
+					<right parent="" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<nodrag />
+				<delaykeyupdate />
+			</simplestring>
+			<label name="label_powergroup">
+				<anchored to="label_displaygroup" width="105">
+					<top anchor="bottom" offset="5" />
+					<left />
+				</anchored>
+				<static textres="item_label_power_group" />
+			</label>
+			<simplestring name="powergroup">
+				<anchored to="displaygroup" height="20">
+					<left />
+					<top anchor="bottom" offset="5" />
+					<right />
+				</anchored>
+				<default>Spells</default>
+				<multilinespacing>20</multilinespacing>
+				<nodrag />
+				<delaykeyupdate />
+			</simplestring>
+		</sheetdata>
+	</windowclass>
+</root>

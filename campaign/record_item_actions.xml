@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<windowclass name="item_power">
+		<margins control="0,0,0,5" />
+		<script file="campaign/scripts/item_power.lua" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<linkcontrol name="shortcut">
+				<anchored to="rightanchor" width="20" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<class>power</class>
+				<readonly />
+			</linkcontrol>
+			<button_idelete name="idelete">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="left" offset="-5" />
+				</anchored>
+			</button_idelete>
+			<button_toggledetail name="activatedetail">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="left" relation="relative" offset="0" />
+				</anchored>
+				<invisible />
+			</button_toggledetail>
+
+			<subwindow name="header">
+				<anchored>
+					<top />
+					<left />
+					<right parent="rightanchor" anchor="left" relation="relative" />
+				</anchored>
+				<activate />
+				<fastinit />
+				<class>item_power_header</class>
+			</subwindow>
+
+			<subwindow name="metadata">
+				<anchored>
+					<top parent="header" anchor="bottom" relation="relative" />
+					<left />
+					<right />
+				</anchored>
+				<invisible />
+				<fastinit />
+				<class>item_power_metadata</class>
+			</subwindow>
+
+			<list_poweraction name="actions">
+				<script file="campaign/scripts/power_item_actionlist.lua" />
+				<anchored>
+					<top parent="header" anchor="bottom" relation="relative" offset="5" />
+					<left offset="5" />
+					<right offset="-5" />
+				</anchored>
+				<invisible />
+			</list_poweraction>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="item_power_header">
+		<script>
+			function focus()
+				nameandactions.subwindow.name.setFocus();
+			end
+		</script>
+		<sheetdata>
+			<genericcontrol name="leftanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<left />
+				</anchored>
+			</genericcontrol>
+
+			<!-- TODO: Figure out the inital width for a zero-counter -->
+			<counter_item_power name="counter">
+				<anchored>
+					<top offset="2" />
+					<left parent="leftanchor" anchor="right" relation="relative" offset="5" />
+				</anchored>
+			</counter_item_power>
+
+			<subwindow name="nameandactions">
+				<anchored>
+					<top />
+					<right />
+					<left parent="leftanchor" anchor="right" relation="relative" />
+				</anchored>
+				<activate />
+				<fastinit />
+				<class>item_power_name_and_actions</class>
+			</subwindow>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="item_power_name_and_actions">
+		<margins control="0,0,0,5" />
+		<sheetdata>
+			<simplestring name="name">
+				<anchored>
+					<left offset="10" />
+					<top offset="2" />
+					<sizelimits>
+						<minimum width="75" />
+						<maximum width="130" />
+					</sizelimits>
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<nodrag />
+				<empty textres="library_recordtype_empty_spell" />
+				<delaykeyupdate />
+			</simplestring>
+			<windowlist name="actionsmini">
+				<anchored>
+					<left parent="name" anchor="right" offset="10" />
+					<top offset="2" />
+					<right offset="-5" />
+				</anchored>
+				<datasource>.actions</datasource>
+				<class>power_action_mini</class>
+				<sortby><field>order</field></sortby>
+				<noscroll />
+				<readonly />
+				<columns width="25" fillwidth="true" />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="item_power_metadata">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<label name="chargesusedlabel">
+				<anchored width="40">
+					<left offset="10" />
+					<top offset="5"/>
+				</anchored>
+				<static textres="power_label_groupuses" />
+			</label>
+			<basicnumber name="charges">
+				<anchored to="chargesusedlabel" width="30" height="20" >
+					<top />
+					<left anchor="right" relation="relative" offset="5" />
+				</anchored>
+				<default>1</default>
+				<min>0</min>
+			</basicnumber>
+			<button_stringcycler name="chargeperiod">
+				<script>
+					function onInit()
+						if KingdomsAndWarfare then
+							parameters[1].labelsres[1] = "item_recharge_long|item_recharge_short|power_label_useperiod_extended|power_label_useperiod_intrigue|item_recharge_never";
+							parameters[1].values[1] = "long|short|extended|intrigue|never";
+						end
+						super.onInit();
+					end
+				</script>
+				<anchored to="chargesusedlabel" width="60" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<parameters>
+					<defaultlabelres>item_use_charges</defaultlabelres>
+					<labelsres>item_recharge_long|item_recharge_short|item_recharge_never</labelsres>
+					<values>long|short|never</values>
+				</parameters>
+			</button_stringcycler>
+		</sheetdata>
+	</windowclass>
+</root>

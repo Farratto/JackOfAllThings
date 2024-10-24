@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<!-- Options -->
+	<string name="option_header_knk">Jack of All Things (GM)</string>
+	<string name="option_label_IDLU">Remove destroyed items from inventory</string>
+	<string name="option_label_SCIP">Show carried item powers</string>
+	<string name="option_label_ASED">Attach spell effects directly to non-spell records. (Convenience only)</string>
+	<string name="option_label_IPAE">Enable Adding Item Powers to Actions Tab</string>
+	<string name="option_label_enable">Enabled</string>
+	<string name="option_label_disable">Disabled</string>
+
+	<string name="item_label_charges">CHARGES</string>
+	<string name="power_label_groupmember">Group</string>
+
+	<string name="item_use_atwill">At Will</string>
+	<string name="item_use_charges">Charges</string>
+	<string name="item_use_consumable">Consumable</string>
+
+	<string name="label_item_recharge">Recharge</string>
+
+	<string name="label_item_mode">Mode</string>
+
+	<string name="item_mode_gain">Gain</string>
+	<string name="item_mode_lose">Lose</string>
+	<string name="item_mode_change">Change</string>
+
+	<string name="label_item_single">Single</string>
+
+	<string name="item_recharge_never">Never</string>
+	<string name="item_recharge_long">Long</string>
+	<string name="item_recharge_short">Short</string>
+	<string name="item_recharge_daily">Daily</string>
+	<string name="item_recharge_dawn">Dawn</string>
+	<string name="item_recharge_noon">Noon</string>
+	<string name="item_recharge_dusk">Dusk</string>
+	<string name="item_recharge_midnight">Midnight</string>
+
+	<string name="label_item_roll">Roll</string>
+
+	<string name="label_item_discharge">On Last</string>
+	<string name="item_discharge_nothing">Nothing</string>
+	<string name="item_discharge_destroy">Destroy</string>
+	<string name="item_discharge_roll">Roll</string>
+	<string name="label_item_destroy_on">Destroy On</string>
+	<string name="label_item_recharge_on">Recharge On</string>
+
+	<string name="item_label_miscellaneous">MISCELLANEOUS</string>
+	<string name="item_label_display_group">Display Group</string>
+	<string name="item_label_power_group">Power Group</string>
+
+	<string name="item_group_send_to_top">Move Under Weapons</string>
+	<string name="item_group_send_to_bottom">Move Under Powers</string>
+
+	<string name="menu_switch_to_powers">Switch to multiple</string>
+	<string name="menu_switch_to_actions">Switch to single</string>
+	<string name="multiple_powers_to_actions_error">Unable to convert multiple powers to a single power. Remove extra powers first.</string>
+</root>

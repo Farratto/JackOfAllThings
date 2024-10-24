@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<windowclass name="power" merge="join">
+		<tab merge="add">
+			<name>actions</name>
+			<icon>tab_actions</icon>
+			<subwindow>actions</subwindow>
+			<resource>tab_actions</resource>
+			<class>power_actions</class>
+			<embed />
+		</tab>
+	</windowclass>
+
+	<windowclass name="power_actions">
+		<script file="campaign/scripts/power_actions.lua" />
+		<sheetdata>
+			<label name="useslabel">
+				<anchored width="40">
+					<left offset="10" />
+					<top offset="5"/>
+				</anchored>
+				<static textres="power_label_groupuses" />
+			</label>
+			<basicnumber name="prepared">
+				<anchored to="useslabel" width="30" height="20" >
+					<top />
+					<left anchor="right" relation="relative" offset="5" />
+				</anchored>
+				<min>0</min>
+			</basicnumber>
+			<cycler_power_useperiod name="usesperiod">
+				<anchored to="useslabel" width="60" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</cycler_power_useperiod>
+			<label name="grouplabel">
+				<anchored width="40">
+					<top parent="useslabel" anchor="bottom" offset="5" />
+					<left offset="10" />
+				</anchored>
+				<static textres="power_label_groupmember" />
+			</label>
+			<basicstring name="group">
+				<anchored to="grouplabel" width="250" height="20" >
+					<top />
+					<left anchor="right" relation="relative" offset="5" />
+				</anchored>
+			</basicstring>
+
+			<label_itemframetop name="actionstitle">
+				<anchored height="20">
+					<top parent="grouplabel" anchor="bottom" offset="10" />
+					<left offset="15" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="char_actions_title" />
+				<icons>char_powers</icons>
+			</label_itemframetop>
+			<list_poweraction name="actions">
+				<script file="campaign/scripts/power_item_actionlist.lua" />
+				<anchored>
+					<top parent="actionstitle" anchor="bottom" relation="relative" offset="5" />
+					<left offset="5" />
+					<right offset="-5" />
+				</anchored>
+			</list_poweraction>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="power_item" merge="join">
+		<sheetdata>
+			<list_poweraction name="actions">
+				<script file="campaign/scripts/power_item_actionlist.lua" />
+			</list_poweraction>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="power_action" merge="join">
+		<script file="campaign/scripts/power_action.lua" />
+	</windowclass>
+
+	<windowclass name="power_action_cast" merge="join">
+		<script>
+			local nInitialWidth = 40;
+			function onInit()
+				if super and super.onInit then
+					super.onInit();
+				end
+				if castlabel then
+					nInitialWidth, _ = castlabel.getSize();
+				end
+			end
+			function update(_, bHideCast)
+				castbutton.setVisible(not bHideCast);
+				attackviewlabel.setVisible(not bHideCast);
+				attackbutton.setVisible(not bHideCast);
+				savebutton.setVisible(not bHideCast);
+
+				local nWidth;
+				local sText;
+				if bHideCast then
+					nWidth = nInitialWidth - 10;
+					sText = Interface.getString("power_label_atk");
+				else
+					nWidth = nInitialWidth;
+					sText = Interface.getString("power_label_cast");
+				end
+				if castlabel then
+					castlabel.setAnchoredWidth(nWidth);
+					castlabel.setValue(sText);
+				end
+			end
+		</script>
+	</windowclass>
+
+	<windowclass name="power_action_damage" merge="join">
+		<script>
+			function update(_, bHideCast)
+				damagebutton.setVisible(not bHideCast);
+			end
+		</script>
+	</windowclass>
+
+	<windowclass name="power_action_heal" merge="join">
+		<script>
+			function update(_, bHideCast)
+				healbutton.setVisible(not bHideCast);
+			end
+		</script>
+	</windowclass>
+
+	<windowclass name="power_action_effect" merge="join">
+		<script>
+			function update(_, bHideCast)
+				effectbutton.setVisible(not bHideCast);
+			end
+		</script>
+	</windowclass>
+
+	<windowclass name="power_action_resource" merge="join">
+		<script>
+			function update(_, bHideCast)
+				resourcebutton.setVisible(not bHideCast);
+			end
+		</script>
+	</windowclass>
+
+	<windowclass name="power_item_header" merge="join">
+		<sheetdata>
+			<windowlist name="actionsmini">
+				<sortby><field>order</field></sortby>
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+</root>
