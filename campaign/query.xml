@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<root version="3.0">
+	<windowclass name="please_disable">
+		<frame>utilitybox</frame>
+		<placement>
+			<size width="330" height="220" />
+		</placement>
+		<sizelimits >
+			<maximum width="450" height="300" />
+			<minimum width="263" height="175" />
+			<dynamic />
+		</sizelimits>
+		<nomove />
+		<noclose />
+		<sheetdata>
+			<windowtitlebar_utilitybox name="title">
+				<resource>window_title_warning</resource>
+			</windowtitlebar_utilitybox>
+			<anchor_content_utilitybox_top />
+			<anchor_content_utilitybox_bottom />
+			<area_content_framed_groupbox name="contentframe" />
+			<subwindow name="warningmsg">
+				<anchored to="contentframe" position="over" />
+				<class>warning_msg</class>
+				<activate />
+			</subwindow>
+			<resize_utilitybox />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="warning_msg">
+		<sheetdata>
+			<anchor_content_top />
+			<stringc_content_noframe_noscroll_static_top>
+				<center />
+				<static textres="window_warning_msg" />
+			</stringc_content_noframe_noscroll_static_top>
+		</sheetdata>
+	</windowclass>
+</root>

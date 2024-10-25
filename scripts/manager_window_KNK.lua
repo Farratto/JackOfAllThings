@@ -3,12 +3,52 @@
 -- attribution and copyright information.
 --
 
+-- luacheck: globals checkForKNK overrideSaveWindowState
+
 local handleDropReorderOriginal;
+local origlSaveWindowState
 
 -- Initialization
 function onInit()
 	handleDropReorderOriginal = WindowManager.handleDropReorder;
 	WindowManager.handleDropReorder = handleDropReorder;
+	if Session.IsHost then
+		origlSaveWindowState = WindowSaveManager.saveWindowState
+		WindowSaveManager.saveWindowState = overrideSaveWindowState
+		checkForKNK()
+	end
+end
+
+function overrideSaveWindowState()
+	local wWarning = Interface.findWindow('please_disable', '');
+	if wWarning then
+		wWarning.close();
+	end
+	origlSaveWindowState()
+	WindowSaveManager.saveWindowState = origlSaveWindowState
+end
+
+function onClose()
+	local wWarning = Interface.findWindow('please_disable', '');
+	if wWarning then
+		wWarning.close();
+	end
+	WindowSaveManager.saveWindowState = origlSaveWindowState
+end
+
+function checkForKNK()
+	local tExtensions = Extension.getExtensions()
+	for _,sExtension in ipairs(tExtensions) do
+		if sExtension == 'KitNKaboodle' then
+			Interface.openWindow('please_disable', '');
+			return true
+		end
+	end
+	local wWarning = Interface.findWindow('please_disable', '');
+	if wWarning then
+		wWarning.close();
+	end
+	return false
 end
 
 function handleHoverReorder(winTarget, bOnControl)
@@ -32,7 +72,7 @@ function handleHoverReorder(winTarget, bOnControl)
 		winTarget.windowlist.dropWidget = dropWidget;
 	end
 
-	local widgetWidth, widgetHeight = dropWidget.getSize();
+	local widgetWidth, widgetHeight = dropWidget.getSize(); -- luacheck: ignore 211
 
 	local nodeDrag = draginfo.getDatabaseNode();
 	local bDifferentParent = nodeDrag.getParent() ~= winTarget.windowlist.getDatabaseNode();
