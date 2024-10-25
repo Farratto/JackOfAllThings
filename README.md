@@ -22,9 +22,9 @@ If you find any negative interactions with other extensions, please let the main
 
 ## Installation
 
-Install from the forge at ~insert here~ \
+Install from the forge at [Jack of All Things]https://forge.fantasygrounds.com/shop/items/1959/view \
 Source code available at [JackOfAllThings.ext](https://github.com/Farratto/JackOfAllThings/releases). \
-Forum Thread: https://www.fantasygrounds.com/forums/showthread.php?~insert here~ \
+Forum Thread: https://www.fantasygrounds.com/forums/showthread.php?83081-Jack-of-All-Trades-for-5e-(rebranding-of-Kit-N-Kaboodle)
 
 ## Attribution
 
