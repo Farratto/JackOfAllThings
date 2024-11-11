@@ -1,7 +1,7 @@
 ## Jack of All Things
 
-**Current Version**: dev_version \
-**Updated**: date
+**Current Version**: ~dev_version~ \
+**Updated**: ~date~
 
 * Adds an action tab to items and spells. Allows for editing spell effects without putting the record onto a character.
 * Adds the ability to set actions to items, which will be shown on the character's Action Tab when the item is equipped.
@@ -20,6 +20,7 @@ If you find any negative interactions with other extensions, please let the main
 
 ### Installation
 
+It is recommended that you disable and hide Kit'N'Kaboodle on your Forge account.  And if you have downloaded any releases from github, you should also delete any copies of KitNKaboodle.ext in your extensions folder. \
 Install from the [Fantasy Grounds Forge](https://forge.fantasygrounds.com/shop/items/1959/view). \
 You can find the source code at Farratto's [GitHub](https://github.com/Farratto/JackOfAllThings/releases). \
 You can ask questions at the [Fantasy Grounds Forum](https://www.fantasygrounds.com/forums/showthread.php?83081-Jack-of-All-Trades-for-5e-(rebranding-of-Kit-N-Kaboodle)) thread.
@@ -37,5 +38,6 @@ Icons made by [pongsakornRed](https://www.flaticon.com/authors/pongsakornred) fr
 
 ### Change Log
 
+* v3.1.2: You may now close the offense tab in CT for current actor.
 * v3.1.1: Added warning window if loading both KNK and JoAT
 * v3.1.0: Rebranded to Jack of All Trades. Minor bug fixes to accomdate Combat Automation extension.

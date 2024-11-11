@@ -1,7 +1,5 @@
---
--- Please see the license.txt file included with this distribution for
+-- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
---
 
 local FORGE_PATH_BASE_ITEMS = "forge.magicitem.baseitems";
 local FORGE_PATH_TEMPLATES = "forge.magicitem.templates";

@@ -1,7 +1,8 @@
---
--- Please see the license.html file included with this distribution for
+-- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
---
+
+--luacheck: globals enableCharCurrencyHandlers disableCharCurrencyHandlers enableCurrencyHandlers
+--luacheck: globals disableCurrencyHandlers updateAllCharacters
 
 local enableCharCurrencyHandlersOriginal;
 local disableCharCurrencyHandlersOriginal;
