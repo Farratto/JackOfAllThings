@@ -38,6 +38,7 @@ Icons made by [pongsakornRed](https://www.flaticon.com/authors/pongsakornred) fr
 
 ### Change Log
 
+* v3.1.3: Previous patch not functioning as intended. Fixed.
 * v3.1.2: You may now close the offense tab in CT for current actor.
 * v3.1.1: Added warning window if loading both KNK and JoAT
 * v3.1.0: Rebranded to Jack of All Trades. Minor bug fixes to accomdate Combat Automation extension.

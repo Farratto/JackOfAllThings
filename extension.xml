@@ -41,7 +41,7 @@
 		<includefile source="ct/ct_host_entry_section.xml" />
 		<includefile source="ct/ct_host_entry.xml" />
 		<includefile source="graphics/graphics_radial.xml" />
-		<icon name="JackOfAllThings_icon" file="graphics/icons/JackOfAllThings.png" />
+		<icon name="JackOfAllThings_icon" file="graphics/icons/JackOfAllThings.webp" />
 		<includefile source="strings/strings.xml" />
 		<script name="PowerUpKNK">
 			function onInit()

@@ -1,9 +1,6 @@
---
--- Please see the license.txt file included with this distribution for
+-- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
---
 
--- Initialization
 function onInit()
 	local nodeGroup = getDatabaseNode();
 	local sGroup = DB.getValue(nodeGroup, "name", "");

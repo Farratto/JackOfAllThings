@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Please see the LICENSE.txt file included with this distribution for
+	attribution and copyright information.
+-->
+<root>
+	<windowclass name="ct_entry" merge="join">
+		<script>
+			function onActiveChanged()
+				self.onSectionChanged("active", true);
+			end
+			function getSectionToggle(sKey)
+				local bResult = false;
+				local sButtonName = "button_section_" .. sKey;
+				local cButton = self[sButtonName];
+				if cButton then
+					bResult = (cButton.getValue() == 1);
+				end
+				return bResult;
+			end
+			function onSectionChanged(sKey, bTurnChanged)
+				if bTurnChanged and (sKey == "active") then
+					local cButton = self["button_section_" .. sKey];
+					if self.isActive() then
+						cButton.setValue(1);
+					else
+						cButton.setValue(0);
+					end
+				end
+				local bShow = self.getSectionToggle(sKey);
+
+				local sSectionName = "sub_" .. sKey;
+				local cSection = self[sSectionName];
+				if cSection then
+					if bShow then
+						local sSectionClassByRecord = string.format("ct_section_%s_%s", sKey, self.getRecordType());
+						if Interface.isWindowClass(sSectionClassByRecord) then
+							cSection.setValue(sSectionClassByRecord, getDatabaseNode());
+						else
+							local sSectionClass = "ct_section_" .. sKey;
+							cSection.setValue(sSectionClass, getDatabaseNode());
+						end
+					else
+						cSection.setValue("", "");
+					end
+					cSection.setVisible(bShow);
+				end
+
+				local sSummaryName = "summary_" .. sKey;
+				local cSummary = self[sSummaryName];
+				if cSummary then
+					cSummary.onToggle();
+				end
+			end
+		</script>
+	</windowclass>
+</root>
