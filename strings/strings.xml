@@ -62,5 +62,6 @@
 	<!-- Windows -->
 	<string name="window_title_warning">Warning!!!</string>
 	<string name="window_warning_msg">You have both Kit'N'Kaboodle and Jack of All Things loaded. Please close Fantasy Grounds and unload Kit'N'Kaboodle.</string>
+	<string name="item_group_title">Item Group</string>
 
 </root>
