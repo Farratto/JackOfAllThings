@@ -1,7 +1,8 @@
---
 -- Please see the license.txt file included with this distribution for
 -- attribution and copyright information.
---
+
+--luacheck: globals onFilter onGroupNamed onItemAdded onItemDeleted onFilteredValueChanged onNameChanged
+--luacheck: globals onDisplayGroupChanged setItemGroup initializeItemGroup
 
 local nListId = 0;
 local nodeChar;

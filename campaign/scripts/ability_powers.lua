@@ -1,7 +1,7 @@
---
--- Please see the license.txt file included with this distribution for
+-- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
---
+
+--luacheck: globals onLockChanged update
 
 bHideCast = true;
 
@@ -36,7 +36,7 @@ function update(bLocked)
 	end
 end
 
-function onDrop(x, y, draginfo)
+function onDrop(x, y, draginfo) --luacheck: ignore 212
 	local node = getDatabaseNode();
 	if draginfo.isType("shortcut") and not WindowManager.getReadOnlyState(node) then
 		local sClass = draginfo.getShortcutData();

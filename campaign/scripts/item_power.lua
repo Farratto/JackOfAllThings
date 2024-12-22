@@ -1,7 +1,9 @@
---
--- Please see the license.txt file included with this distribution for
+-- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
---
+
+--luacheck: globals onChargesChanged onGroupChanged onActionAdded onActionDeleted shouldShowToggle
+--luacheck: globals shouldShowMetaData updateToggle toggleDetail update onMenuSelection getDescription
+--luacheck: globals usePower
 
 local bReadOnly;
 local bHideCast;
@@ -26,7 +28,7 @@ function onClose()
 	DB.removeHandler(nodePower.getPath("actions"), "onChildDeleted", onActionDeleted);
 end
 
-function onChargesChanged(nodePrepared)
+function onChargesChanged(nodePrepared) --luacheck: ignore 212
 	local nodePower = getDatabaseNode();
 	activatedetail.setVisible(shouldShowToggle(nodePower));
 	metadata.setVisible(shouldShowMetaData(nodePower));
@@ -50,7 +52,7 @@ function shouldShowToggle(nodePower)
 	return (DB.getChildCount(nodePower, "actions") > 0) or bHideCast;
 end
 
-function shouldShowMetaData(nodePower)
+function shouldShowMetaData(nodePower) --luacheck: ignore 212
 	return bHideCast and (activatedetail.getValue() == 1);
 end
 

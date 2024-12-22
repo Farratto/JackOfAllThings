@@ -1,7 +1,7 @@
---
--- Please see the license.txt file included with this distribution for
+-- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
---
+
+--luacheck: globals update onGroupChanged
 
 function onInit()
 	powergroup.onValueChanged = onGroupChanged;
@@ -20,7 +20,7 @@ function update(bLocked)
 	end
 end
 
-function onGroupChanged(sGroup)
+function onGroupChanged(sGroup) --luacheck: ignore 212
 	local nodeItem = getDatabaseNode();
 	local sGroup = powergroup.getValue()
 	for _,nodePower in pairs(DB.getChildren(nodeItem, "powers")) do

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Please see the LICENSE.txt file included with this distribution for
+	attribution and copyright information.
+-->
+<root>
+	<icon name="send" file="graphics/radial/icon_image_view_preload.webp" />
+	<icon name="radial_reparse_spell" file="graphics/radial/icon_text_list.png" />
+	<icon name="radial_delete_action_confirm" file="graphics/radial/icon_delete.png" />
+	<icon name="radial_create_action" file="graphics/radial/icon_image_layer_pointer_menu.png" />
+	<icon name="radial_delete_action" file="graphics/radial/icon_image_layer_pointer_delete.png" />
+	<icon name="refresh" file="graphics/buttons/button_toolbar_refresh.png" />
+	<icon name="JackOfAllThings_icon" file="graphics/icons/JackOfAllThings.webp" />
+	<icon name="button_cancel_down" file="graphics/icons/button_cancel_down_white.webp" />
+	<icon name="button_cancel_up" file="graphics/icons/button_cancel_up_white.webp" />
+	<icon name="button_targeted_blue_down" file="graphics/icons/button_targeted_blue_down.webp" />
+	<icon name="button_targeted_blue_up" file="graphics/icons/button_targeted_blue_up.webp" />
+	<icon name="minimized_target" file="graphics/icons/minimized_target.webp" />
+</root>

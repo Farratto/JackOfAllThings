@@ -10,6 +10,7 @@
 * Time-based recharge. When used in conjunction with the Clock Adjuster extension, items may be configured to recharge daily at Dawn, Noon, Dusk, or Midnight.
 * Equipped Effects. When the two extensions are used in conjunction, the power automation feature of Equipped Effects will add the power to the item.
 * Automatic Effects data. Leverages data in Automatic effects to automate item recharge configuration for items equipped while using Equipped Effects and Clock Adjuster.
+* Targeting Window. Huge icons. Option to open automatically on turn defaulted to off. Otherwise open by double-clicking target icon within CT targetting tab.
 
 ### Other Extensions
 
@@ -34,12 +35,14 @@ SmiteWorks owns rights to code sections copied from their rulesets by permission
 'Fantasy Grounds' is Copyright 2004-2021 SmiteWorks USA LLC.
 
 Icons made by [Freepik](https://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com/). \
-Icons made by [pongsakornRed](https://www.flaticon.com/authors/pongsakornred) from [www.flaticon.com](https://www.flaticon.com/)
+Icons made by [pongsakornRed](https://www.flaticon.com/authors/pongsakornred) from [www.flaticon.com](https://www.flaticon.com/) \
+Icons made by [sbed](https://opengameart.org/users/sbed) from [Game-icons.net](https://game-icons.net/)
 
 ### Change Log
 
+* v3.1.6: New targetting window with huge icons. Option to auto-open defaulted to off.
 * v3.1.4: Updated UI Elements in support of next round of deprecations. Minor Aesthetic Improvement.
 * v3.1.3: Previous patch not functioning as intended: Fixed.
 * v3.1.2: You may now close the offense tab in CT for current actor.
 * v3.1.1: Added warning window if loading both KNK and JoAT
-* v3.1.0: Rebranded to Jack of All Trades. Minor bug fixes to accomdate Combat Automation extension.
+* v3.1.0: Rebranded to Jack of All Things. Minor bug fixes to accomdate Combat Automation extension.

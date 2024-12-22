@@ -25,23 +25,25 @@
 		<script name="PowerManagerKNK" file="scripts/manager_power_knk.lua" />
 		<script name="WindowManagerKNK" file="scripts/manager_window_knk.lua" />
 		<includefile source="campaign/query.xml" />
+		<includefile source="campaign/window_targets.xml" />
+<!--
 		<includefile source="campaign/record_ability.xml" />
-		<includefile source="campaign/record_char_actions.xml" />
 		<includefile source="campaign/record_class.xml" />
 		<includefile source="campaign/record_feat.xml" />
+		<includefile source="campaign/record_race.xml" />
+-->
+		<includefile source="campaign/record_char_actions.xml" />
 		<includefile source="campaign/record_item.xml" />
 		<includefile source="campaign/record_item_actions.xml" />
 		<includefile source="campaign/record_item_charges.xml" />
 		<includefile source="campaign/record_itemtemplate.xml" />
 		<includefile source="campaign/record_npc.xml" />
 		<includefile source="campaign/record_power.xml" />
-		<includefile source="campaign/record_race.xml" />
 		<includefile source="campaign/template_item.xml" />
 		<includefile source="campaign/template_power.xml" />
 		<includefile source="ct/ct_host_entry_section.xml" />
 		<includefile source="ct/ct_host_entry.xml" />
-		<includefile source="graphics/graphics_radial.xml" />
-		<icon name="JackOfAllThings_icon" file="graphics/icons/JackOfAllThings.webp" />
+		<includefile source="graphics/graphics.xml" />
 		<includefile source="strings/strings.xml" />
 		<script name="PowerUpKNK">
 			function onInit()

@@ -1,11 +1,13 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
+--luacheck: globals forgeMagicItem onAdded addMagicItemToCampaign addActionData
+
 local FORGE_PATH_BASE_ITEMS = "forge.magicitem.baseitems";
 local FORGE_PATH_TEMPLATES = "forge.magicitem.templates";
 
 local forgeMagicItemOriginal;
-local createMagicItemOriginal;
+-- local createMagicItemOriginal;
 local addMagicItemToCampaignOriginal;
 
 local winForgeActive;

@@ -1,7 +1,9 @@
---
 -- Please see the license.txt file included with this distribution for
 -- attribution and copyright information.
---
+
+--luacheck: globals setListId onMenuSelection addItem removeItem updateItem rebuildItemPowers updateLink
+--luacheck: globals shouldBeShown onFilter onFilteredValueChanged onPowerAdded onPowerRemoved onPowerListChanged
+--luacheck: globals checkForSort
 
 local itemPowers = {};
 local visibleItems = {};

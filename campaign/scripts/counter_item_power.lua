@@ -1,7 +1,8 @@
---
--- Please see the license.txt file included with this distribution for
+-- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
---
+
+--luacheck: globals getCastValue adjustCounter onChargesChanged calculateTotal calculateUsed getTotalCharges
+--luacheck: globals getChargesUsed
 
 local nodePower;
 local nodeItem;

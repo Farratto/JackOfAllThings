@@ -1,7 +1,14 @@
---
--- Please see the license.txt file included with this distribution for
+-- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
---
+
+-- luacheck: globals getItemSourceType addEquippedSpellPC beginRecharging onTimeChanged rechargeItemPowers
+-- luacheck: globals getRechargeAmount calculateDailyRecharge handleItemRecharge shouldRollRecharge rollRecharge
+-- luacheck: globals onRechargeRoll distributeCharges handleItemChargesUsed destroyDischargedItem
+-- luacheck: globals beginRollDischargedItem handleRollDischargedItem onDischargeRoll rechargeDischargedItem
+-- luacheck: globals updateDischargeCount showCarriedOrEquipped shouldShowItemPowers getItemGroupName
+-- luacheck: globals beginCreatingItemGroup handleItemGroupCreation countCharges getActorResourceItem
+-- luacheck: globals isChargeResource getCurrentChargeResource getAvailableChargeResource
+-- luacheck: globals getItemResourceChargeSetters addChargeResourceChangedHandler removeChargeResourceChangedHandler
 
 OOB_MSGTYPE_RECHARGE_ITEM = "rechargeitem";
 OOB_MSGTYPE_CREATE_ITEM_GROUP = "createitemgroup";

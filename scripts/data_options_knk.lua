@@ -1,8 +1,23 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
+-- luacheck: globals registerOptions openTargetWindow closeAllTargetWindows handleTargetWindowOpen
+-- luacheck: globals handleCloseTargetWindow getControllingClient sendOpenTargetWindow openTargetWindow
+-- luacheck: globals closeTargetWindow sendCloseTargetWindow checkOpenTargetWindow getRootCommander
+
+OOB_MSGTYPE_TRGTWNDW = "targetwindow";
+OOB_MSGTYPE_CLOSETRGTWNDW = "closetargetwindow";
+
 function onInit()
 	registerOptions();
+
+	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_TRGTWNDW, handleTargetWindowOpen);
+	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_CLOSETRGTWNDW, handleCloseTargetWindow);
+
+	if Session.IsHost then
+		CombatManager.setCustomTurnStart(checkOpenTargetWindow);
+		CombatManager.setCustomTurnEnd(closeAllTargetWindows);
+	end
 end
 
 function registerOptions()
@@ -16,4 +31,157 @@ function registerOptions()
 	-- ASED option to be used at a later date.
 	-- OptionsManager.registerOption2("ASED", true, "option_header_knk", "option_label_ASED", "option_entry_cycler",
 	-- 	{ labels = "option_val_on", values = "on", baselabel = "option_val_off", baseval = "off", default = "off" });
+	OptionsManager.registerOptionData({	sKey = 'AOTW', bLocal = true, sGroupRes = 'option_header_knk' });
+end
+
+function checkOpenTargetWindow(nodeCT)
+	local sOwner = getControllingClient(nodeCT);
+
+	if sOwner then
+		sendOpenTargetWindow(nodeCT)
+	else
+		openTargetWindow(nodeCT);
+	end
+end
+
+function closeAllTargetWindows(nodeCT)
+	closeTargetWindow(nodeCT);
+	local sOwner = getControllingClient(nodeCT);
+	if sOwner then
+		sendCloseTargetWindow(sOwner, nodeCT);
+	end
+end
+
+function handleTargetWindowOpen(msgOOB)
+	if OptionsManager.isOption('AOTW', 'off') then
+		return;
+	end
+	local nodeCT = msgOOB.sCTNodeID;
+	if nodeCT then
+		openTargetWindow(nodeCT);
+	else
+		Debug.console("DataOptionsKNK.handleTargetWindowOpen - not nodeCT");
+	end
+end
+
+function handleCloseTargetWindow(msgOOB)
+	local nodeCT = msgOOB.sCTNodeID;
+	if nodeCT then
+		closeTargetWindow(nodeCT);
+	else
+		Debug.console("DataOptionsKNK.handleCloseTargetWindow - not nodeCT");
+	end
+end
+
+---For a given cohort actor, determine the root character node that owns it
+function getRootCommander(rActor)
+	if not rActor then
+		Debug.console("DataOptionsKNK.getRootCommander - rActor doesn't exist");
+		return;
+	end
+	local sRecord = ActorManager.getCreatureNodeName(rActor);
+	local sRecordSansModule = StringManager.split(sRecord, "@")[1];
+	local aRecordPathSansModule = StringManager.split(sRecordSansModule, ".");
+	if aRecordPathSansModule[1] and aRecordPathSansModule[2] then
+		return aRecordPathSansModule[1] .. "." .. aRecordPathSansModule[2];
+	end
+	return nil;
+end
+
+--Returns nil for inactive identities and those owned by the GM
+function getControllingClient(nodeCT)
+	if not nodeCT then
+		Debug.console("DataOptionsKNK.getControllingClient - nodeCT doesn't exist");
+		return;
+	end
+	local sPCNode = nil;
+	local rActor = ActorManager.resolveActor(nodeCT);
+	local sNPCowner;
+	if ActorManager.isPC(rActor) then
+		sPCNode = ActorManager.getCreatureNodeName(rActor);
+	else
+		sNPCowner = DB.getValue(nodeCT, "NPCowner", "");
+		if sNPCowner == "" then
+			if Pets and Pets.isCohort(rActor) then
+				sPCNode = getRootCommander(rActor);
+			else
+				if FriendZone and FriendZone.isCohort(rActor) then
+					sPCNode = getRootCommander(rActor);
+				end
+			end
+		end
+	end
+
+	if sPCNode or sNPCowner then
+		for _, value in pairs(User.getAllActiveIdentities()) do
+			if sPCNode then
+				if "charsheet." .. value == sPCNode then
+					return User.getIdentityOwner(value);
+				end
+			end
+			if sNPCowner then
+				local sIDOwner = User.getIdentityOwner(value)
+				if sIDOwner == sNPCowner then
+					return sIDOwner;
+				end
+			end
+		end
+	end
+	return nil;
+end
+
+function sendOpenTargetWindow(nodeCT)
+	if not nodeCT then
+		nodeCT = CombatManager.getActiveCT();
+	end
+	local sOwner = getControllingClient(nodeCT);
+
+	if sOwner then
+		local msgOOB = {};
+		msgOOB.type = OOB_MSGTYPE_TRGTWNDW;
+		msgOOB.sCTNodeID = DB.getPath(nodeCT);
+		Comm.deliverOOBMessage(msgOOB, sOwner);
+	else
+		ChatManager.SystemMessage(Interface.getString("msg_NotConnected"));
+	end
+end
+
+function openTargetWindow(nodeCT)
+	if OptionsManager.isOption('AOTW', 'off') then
+		return;
+	end
+	if not nodeCT then
+		nodeCT = CombatManager.getActiveCT();
+	end
+	local wTargets = Interface.findWindow('window_targets', nodeCT);
+	if wTargets then
+		wTargets.bringToFront();
+	else
+		Interface.openWindow('window_targets', nodeCT);
+	end
+end
+
+function closeTargetWindow(nodeCT)
+	if not nodeCT then
+		Debug.console("DataOptionsKNK.closeTargetWindow - not nodeCT");
+		return;
+	end
+	local wTargets = Interface.findWindow('window_targets', nodeCT);
+	if wTargets then wTargets.close() end
+end
+
+function sendCloseTargetWindow(sOwner, nodeCT)
+	if not nodeCT then
+		Debug.console("DataOptionsKNK.sendCloseTargetWindow - not nodeCT");
+		return;
+	end
+	if not sOwner then sOwner = getControllingClient(nodeCT) end
+	if sOwner then
+		local msgOOB = {};
+		msgOOB.type = OOB_MSGTYPE_CLOSETRGTWNDW;
+		msgOOB.sCTNodeID = DB.getPath(nodeCT);
+		Comm.deliverOOBMessage(msgOOB, sOwner);
+	else
+		ChatManager.SystemMessage(Interface.getString("msg_NotConnected"));
+	end
 end

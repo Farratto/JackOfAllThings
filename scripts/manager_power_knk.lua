@@ -1,7 +1,8 @@
---
 -- Please see the license.html file included with this distribution for
 -- attribution and copyright information.
---
+
+--luacheck: globals addPower resetPowers getPowerActorNode resetIntriguePowers addPower resetPowers
+--luacheck: globals fillActionOrderGap adjustActionOrder
 
 local addPowerOriginal;
 local resetPowersOriginal;
@@ -83,7 +84,7 @@ function fillActionOrderGap(nodePower)
 					tExistingOrders[nInnerOrder] = false;
 				end
 			end
-			nOrder = nOrder - 1; -- repeat since everything just shifted down
+			nOrder = nOrder - 1; -- luacheck: ignore 311 -- repeat since everything just shifted down
 			nCount = nCount - 1;
 		end
 	end
