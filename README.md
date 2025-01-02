@@ -14,7 +14,7 @@
 
 ### Other Extensions
 
-Care has been taken to avoid negative interactions with other extensions.  Current extension support includes: \
+Care has been taken to avoid negative interactions with other extensions.  Current extension support includes:
 * Equipped Items, Advanced Effects, Map Parcels, Clock Adjuster, Combat Automation, 5e Automatic Effects.
 
 If you find any negative interactions with other extensions, please let the maintainer know on the forums or Discord.
@@ -36,10 +36,11 @@ SmiteWorks owns rights to code sections copied from their rulesets by permission
 
 Icons made by [Freepik](https://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com/). \
 Icons made by [pongsakornRed](https://www.flaticon.com/authors/pongsakornred) from [www.flaticon.com](https://www.flaticon.com/) \
-Icons made by [sbed](https://opengameart.org/users/sbed) from [Game-icons.net](https://game-icons.net/)
+Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https://delapouite.com/) from [Game-icons.net](https://game-icons.net/)
 
 ### Change Log
 
+* v3.2.0: Added Next Actor button to targetting window.
 * v3.1.6: New targetting window with huge icons. Option to auto-open defaulted to off.
 * v3.1.4: Updated UI Elements in support of next round of deprecations. Minor Aesthetic Improvement.
 * v3.1.3: Previous patch not functioning as intended: Fixed.

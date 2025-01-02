@@ -15,5 +15,7 @@
 	<icon name="button_cancel_up" file="graphics/icons/button_cancel_up_white.webp" />
 	<icon name="button_targeted_blue_down" file="graphics/icons/button_targeted_blue_down.webp" />
 	<icon name="button_targeted_blue_up" file="graphics/icons/button_targeted_blue_up.webp" />
+	<icon name="button_next_up_green" file="graphics/icons/button_next_up_green.webp" />
+	<icon name="button_next_down_blue" file="graphics/icons/button_next_down_blue.webp" />
 	<icon name="minimized_target" file="graphics/icons/minimized_target.webp" />
 </root>

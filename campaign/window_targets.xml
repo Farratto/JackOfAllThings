@@ -115,6 +115,7 @@
 	<windowclass name="window_targets_bottom">
 		<sheetdata>
 			<anchor_content_top />
+			<anchor_listitem_right />
 			<buttoncontrol name="targeting_add_button">
 				<anchored width="40" height="40" >
 					<right anchor="center" offset="-15" />
@@ -169,6 +170,15 @@
 					end
 				</script>
 			</buttoncontrol>
+			<button_ct_controls_nextturn name="button_nextactor">
+				<anchored width="40" height="40" merge="replace">
+					<right parent="rightanchor" offset="-10" />
+					<bottom offset="-5" />
+				</anchored>
+				<tintable merge="delete"/>
+<!--				<icon normal="button_ctnextround" pressed="button_ctnextround_down" /> -->
+				<icon normal="button_next_up_green" pressed="button_next_down_blue" />
+			</button_ct_controls_nextturn>
 		</sheetdata>
 	</windowclass>
 
