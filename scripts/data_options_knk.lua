@@ -4,15 +4,23 @@
 -- luacheck: globals registerOptions openTargetWindow closeAllTargetWindows handleTargetWindowOpen
 -- luacheck: globals handleCloseTargetWindow getControllingClient sendOpenTargetWindow openTargetWindow
 -- luacheck: globals closeTargetWindow sendCloseTargetWindow checkOpenTargetWindow getRootCommander
+-- luacheck: globals fonDoubleClick onDoubleClickJOAT handlePictureRequest createPictureItemSelective
 
 OOB_MSGTYPE_TRGTWNDW = "targetwindow";
 OOB_MSGTYPE_CLOSETRGTWNDW = "closetargetwindow";
+OOB_MSGTYPE_REQUEST_PIC = 'request_picture';
+
+fonDoubleClick = '';
 
 function onInit()
 	registerOptions();
 
 	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_TRGTWNDW, handleTargetWindowOpen);
 	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_CLOSETRGTWNDW, handleCloseTargetWindow);
+	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_REQUEST_PIC, handlePictureRequest);
+
+	fonDoubleClick = Token.onDoubleClick;
+	Token.onDoubleClick = onDoubleClickJOAT;
 
 	if Session.IsHost then
 		CombatManager.setCustomTurnStart(checkOpenTargetWindow);
@@ -32,6 +40,9 @@ function registerOptions()
 	-- OptionsManager.registerOption2("ASED", true, "option_header_knk", "option_label_ASED", "option_entry_cycler",
 	-- 	{ labels = "option_val_on", values = "on", baselabel = "option_val_off", baseval = "off", default = "off" });
 	OptionsManager.registerOptionData({	sKey = 'AOTW', bLocal = true, sGroupRes = 'option_header_knk' });
+	OptionsManager.registerOptionData({	sKey = 'AUTO_SHARE_PICS', sGroupRes = 'option_header_knk', tCustom = {
+		default = "on" }
+	});
 end
 
 function checkOpenTargetWindow(nodeCT)
@@ -184,4 +195,69 @@ function sendCloseTargetWindow(sOwner, nodeCT)
 	else
 		ChatManager.SystemMessage(Interface.getString("msg_NotConnected"));
 	end
+end
+
+function onDoubleClickJOAT(token, image) --luacheck: ignore 212
+	if not Session.IsHost and OptionsManager.isOption('AUTO_SHARE_PICS', 'on') then
+		local nodeCT = CombatManager.getCTFromToken(token);
+		if nodeCT and CombatManager.getFactionFromCT(nodeCT) ~= "friend" then
+			local sAsset = DB.getValue(nodeCT, 'picture')
+			if sAsset and sAsset ~= '' then
+				local sName;
+				local nIsId = DB.getValue(nodeCT, 'isidentified');
+				if not nIsId or nIsId == 1 then
+					sName = DB.getValue(nodeCT, 'name');
+				else
+					sName = DB.getValue(nodeCT, 'nonid_name');
+				end
+				if not sName or sName == '' then sName = 'Unidentified' end
+				local msgOOB = {};
+				msgOOB.sAsset = sAsset;
+				msgOOB.sName = sName;
+				msgOOB.sOwner = Session.UserName;
+				msgOOB.type = OOB_MSGTYPE_REQUEST_PIC;
+				Comm.deliverOOBMessage(msgOOB);
+			end
+		end
+	end
+end
+function handlePictureRequest(msgOOB)
+	createPictureItemSelective(msgOOB.sAsset, msgOOB.sName, msgOOB.sOwner);
+end
+function createPictureItemSelective(sAsset, sName, sOwner)
+	if (sAsset or "") == "" then
+		return false;
+	end
+	if (sName or "") == "" then
+		sName = UtilityManager.getAssetBaseFileName(sAsset);
+	end
+
+	local nodePicture = nil;
+	local sNameFind = StringManager.trim(sName);
+	local tMappings = RecordDataManager.getDataPaths("picture");
+	for _,sMapping in ipairs(tMappings) do
+		for _,v in ipairs(DB.getChildrenGlobal(sMapping)) do
+			if (StringManager.trim(DB.getValue(v, "name", "")) == sNameFind) and (DB.getValue(v, "picture", "") == sAsset) then
+				nodePicture = v;
+				break;
+			end
+		end
+		if nodePicture then
+			break;
+		end
+	end
+	if not nodePicture then
+		nodePicture = DB.createChild("picture");
+		DB.setValue(nodePicture, "name", "string", sName);
+		DB.setValue(nodePicture, "picture", "token", sAsset);
+	end
+
+	if sOwner then
+		local msgOOB = {};
+		msgOOB.type = PictureManager.OOB_MSGTYPE_PICTURE_SHARE;
+		msgOOB.sRecordNode = DB.getPath(nodePicture);
+		Comm.deliverOOBMessage(msgOOB);
+	end
+
+	return true;
 end

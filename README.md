@@ -40,6 +40,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* 3.3.0: New Option: Players may double-click nonfriendly NPCs to see their highres picture
 * v3.2.0: Added Next Actor button to targetting window.
 * v3.1.6: New targetting window with huge icons. Option to auto-open defaulted to off.
 * v3.1.4: Updated UI Elements in support of next round of deprecations. Minor Aesthetic Improvement.
