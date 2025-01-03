@@ -4,16 +4,19 @@
 	attribution and copyright information.
 -->
 <root>
-	<windowclass name="item_power">
-		<margins control="0,0,0,5" />
+	<windowclass name="item_power" copy="power_item_header">
+<!--		<margins control="0,0,0,5" /> -->
 		<script file="campaign/scripts/item_power.lua" />
 		<sheetdata>
+			<string_poweritem_header_name name="name" merge="delete" />
+<!--
 			<genericcontrol name="rightanchor">
 				<anchored height="0" width="0">
 					<top offset="2" />
 					<right />
 				</anchored>
 			</genericcontrol>
+-->
 			<linkcontrol name="shortcut">
 				<anchored to="rightanchor" width="20" height="20">
 					<top />
@@ -28,6 +31,7 @@
 					<right anchor="left" offset="-5" />
 				</anchored>
 			</button_idelete>
+
 			<button_toggledetail name="activatedetail">
 				<anchored to="rightanchor">
 					<top />
@@ -122,6 +126,14 @@
 				<empty textres="library_recordtype_empty_spell" />
 				<delaykeyupdate />
 			</simplestring>
+			<list_poweraction_mini name="actionsmini">
+				<anchored merge="replace">
+					<left parent="name" anchor="right" offset="10" />
+					<top offset="2" />
+					<right offset="-5" />
+				</anchored>
+			</list_poweraction_mini>
+<!--
 			<windowlist name="actionsmini">
 				<anchored>
 					<left parent="name" anchor="right" offset="10" />
@@ -135,6 +147,7 @@
 				<readonly />
 				<columns width="25" fillwidth="true" />
 			</windowlist>
+-->
 		</sheetdata>
 	</windowclass>
 
@@ -163,7 +176,7 @@
 							parameters[1].labelsres[1] = "item_recharge_long|item_recharge_short|power_label_useperiod_extended|power_label_useperiod_intrigue|item_recharge_never";
 							parameters[1].values[1] = "long|short|extended|intrigue|never";
 						end
-						super.onInit();
+						if super and super.onInit then super.onInit() end
 					end
 				</script>
 				<anchored to="chargesusedlabel" width="60" height="20">
