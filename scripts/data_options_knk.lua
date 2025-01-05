@@ -256,7 +256,7 @@ function createPictureItemSelective(sAsset, sName, sOwner)
 		local msgOOB = {};
 		msgOOB.type = PictureManager.OOB_MSGTYPE_PICTURE_SHARE;
 		msgOOB.sRecordNode = DB.getPath(nodePicture);
-		Comm.deliverOOBMessage(msgOOB);
+		Comm.deliverOOBMessage(msgOOB, sOwner);
 	end
 
 	return true;

@@ -40,6 +40,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* v3.3.2: Was sending NPC pictures to all connected clients. FIXED
 * v3.3.1: Fixed interaction with Spell Action Info
 * v3.3.0: New Option: Players may double-click nonfriendly NPCs to see their highres picture
 * v3.2.0: Added Next Actor button to targetting window.
