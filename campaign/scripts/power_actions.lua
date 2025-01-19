@@ -17,8 +17,13 @@ function onLockChanged(nodeLocked)
 end
 
 function update(bReadOnly)
-	prepared.setReadOnly(bReadOnly);
-	usesperiod.setReadOnly(bReadOnly);
+	if bReadOnly == nil then bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode()) end
+	for _,control in ipairs(getControls()) do
+		control.setReadOnly(bReadOnly);
+		--if control.update then control.update() end
+	end
+	--prepared.setReadOnly(bReadOnly);
+	--usesperiod.setReadOnly(bReadOnly);
 	actions.update(bReadOnly, true);
 
 	if bReadOnly then

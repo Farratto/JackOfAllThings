@@ -96,6 +96,7 @@
 				end
 			end
 			function update(_, bHideCast)
+				if super and super.update then super.update() end
 				castbutton.setVisible(not bHideCast);
 				attackviewlabel.setVisible(not bHideCast);
 				attackbutton.setVisible(not bHideCast);
@@ -121,6 +122,7 @@
 	<windowclass name="power_action_damage" merge="join">
 		<script>
 			function update(_, bHideCast)
+				if super and super.update then super.update() end
 				damagebutton.setVisible(not bHideCast);
 			end
 		</script>
@@ -129,6 +131,7 @@
 	<windowclass name="power_action_heal" merge="join">
 		<script>
 			function update(_, bHideCast)
+				if super and super.update then super.update() end
 				healbutton.setVisible(not bHideCast);
 			end
 		</script>
@@ -137,6 +140,7 @@
 	<windowclass name="power_action_effect" merge="join">
 		<script>
 			function update(_, bHideCast)
+				if super and super.update then super.update() end
 				effectbutton.setVisible(not bHideCast);
 			end
 		</script>
@@ -145,6 +149,7 @@
 	<windowclass name="power_action_resource" merge="join">
 		<script>
 			function update(_, bHideCast)
+				if super and super.update then super.update() end
 				resourcebutton.setVisible(not bHideCast);
 			end
 		</script>

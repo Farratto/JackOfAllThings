@@ -4,6 +4,9 @@
 --luacheck: globals onMenuSelection addEntry update
 
 function onInit()
+	--local nodeRecord = window.getDatabaseNode();
+	--local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+	--update(bReadOnly);
 	if not isReadOnly() then
 		registerMenuItem(Interface.getString("list_menu_createitem"), "insert", 5);
 	end
@@ -15,10 +18,13 @@ function onMenuSelection(selection)
 	end
 end
 
-function update()
+function update(bReadOnly)
+	--if bReadOnly == nil then bReadOnly = WindowManager.getReadOnlyState(window.getDatabaseNode()) end
+	--setReadOnly(bReadOnly);
 	local bEditMode = (window.powerlist_iedit.getValue() == 1);
 	for _,win in pairs(getWindows()) do
-		win.idelete.setVisibility(bEditMode);
+		--setReadOnly(bReadOnly);
+		win.idelete.setVisible(bEditMode);
 	end
 end
 

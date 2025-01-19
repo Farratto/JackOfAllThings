@@ -25,6 +25,13 @@ function onLockChanged(nodeLocked)
 end
 
 function update(bLocked)
+	if bLocked == nil then bLocked = WindowManager.getReadOnlyState(getDatabaseNode()) end
+	for _,control in ipairs(getControls()) do
+		control.setReadOnly(bReadOnly);
+		if control.update then control.update() end
+	end
+	powerlist_iadd.setVisible(not bLocked);
+
 	charges.subwindow.update(bLocked);
 	miscellaneous.subwindow.update(bLocked);
 

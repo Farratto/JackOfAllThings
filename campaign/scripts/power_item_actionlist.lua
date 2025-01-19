@@ -28,7 +28,7 @@ function onInit()
 	DB.addHandler(DB.getPath(nodeChar, "powergroup"), "onChildDeleted", onAbilityChanged);
 	DB.addHandler(DB.getPath(nodeChar, "powergroup.*.name"), "onUpdate", onAbilityChanged);
 
-	PowerManagerKNK.fillActionOrderGap(window.getDatabaseNode());
+	PowerManagerKNK.fillActionOrderGap(nodePower);
 end
 
 function onClose()

@@ -31,6 +31,9 @@ function onDetailsDragStart(_, _, _, draginfo)
 end
 
 function update(bReadOnly, bHideCast)
+	if bReadOnly == nil then
+		bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+	end
 	if bReadOnly then
 		resetMenuItems();
 		detail.onDragStart = onDragStartOriginal;
