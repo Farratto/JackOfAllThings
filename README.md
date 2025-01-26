@@ -40,6 +40,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* v3.3.4: Disabled inventory tab on NPCs. This is functionality is covered by Map Parcels extension.
 * v3.3.3: Spamming console log: FIXED.
 * v3.3.2: Was sending NPC pictures to all connected clients. FIXED
 * v3.3.1: Fixed interaction with Spell Action Info
