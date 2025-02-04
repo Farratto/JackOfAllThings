@@ -10,7 +10,8 @@
 	<string name="option_label_SCIP">Show carried item powers</string>
 	<string name="option_label_ASED">Attach spell effects directly to non-spell records. (Convenience only)</string>
 	<string name="option_label_IPAE">Enable Adding Item Powers to Actions Tab</string>
-	<string name="option_label_AOTW">Automatically open/close targeting window on turn start/end</string>
+	<string name="option_label_AOTW">Automatically open targeting window on turn start</string>
+	<string name="option_label_ACTW">Automatically close targeting window on turn end</string>
 	<string name="option_label_AUTO_SHARE_PICS">Allow players to view non-friendly NPC pictures</string>
 	<string name="option_label_enable">Enabled</string>
 	<string name="option_label_disable">Disabled</string>

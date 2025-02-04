@@ -6,7 +6,6 @@
 * Adds an action tab to items and spells. Allows for editing spell effects without putting the record onto a character.
 * Adds the ability to set actions to items, which will be shown on the character's Action Tab when the item is equipped.
 * Adds charges to items. Automated recharging.  Can have items recharged using a die.  Can configure something to happen when the item runs out of charges.
-* Adds inventories to NPCs. The primary benefit of this feature at present is to give NPCs items that have Actions.
 * Time-based recharge. When used in conjunction with the Clock Adjuster extension, items may be configured to recharge daily at Dawn, Noon, Dusk, or Midnight.
 * Equipped Effects. When the two extensions are used in conjunction, the power automation feature of Equipped Effects will add the power to the item.
 * Automatic Effects data. Leverages data in Automatic effects to automate item recharge configuration for items equipped while using Equipped Effects and Clock Adjuster.
@@ -40,6 +39,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* v3.4.0: Added option to keep targeting window open on turn change
 * v3.3.4: Disabled inventory tab on NPCs. This is functionality is covered by Map Parcels extension.
 * v3.3.3: Spamming console log: FIXED.
 * v3.3.2: Was sending NPC pictures to all connected clients. FIXED

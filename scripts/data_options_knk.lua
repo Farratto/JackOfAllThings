@@ -40,6 +40,7 @@ function registerOptions()
 	-- OptionsManager.registerOption2("ASED", true, "option_header_knk", "option_label_ASED", "option_entry_cycler",
 	-- 	{ labels = "option_val_on", values = "on", baselabel = "option_val_off", baseval = "off", default = "off" });
 	OptionsManager.registerOptionData({	sKey = 'AOTW', bLocal = true, sGroupRes = 'option_header_knk' });
+	OptionsManager.registerOptionData({	sKey = 'ACTW', bLocal = true, sGroupRes = 'option_header_knk' });
 	OptionsManager.registerOptionData({	sKey = 'AUTO_SHARE_PICS', sGroupRes = 'option_header_knk', tCustom = {
 		default = "on" }
 	});
@@ -76,6 +77,9 @@ function handleTargetWindowOpen(msgOOB)
 end
 
 function handleCloseTargetWindow(msgOOB)
+	if OptionsManager.isOption('ACTW', 'off') then
+		return;
+	end
 	local nodeCT = msgOOB.sCTNodeID;
 	if nodeCT then
 		closeTargetWindow(nodeCT);
@@ -173,6 +177,9 @@ function openTargetWindow(nodeCT)
 end
 
 function closeTargetWindow(nodeCT)
+	if OptionsManager.isOption('ACTW', 'off') then
+		return;
+	end
 	if not nodeCT then
 		Debug.console("DataOptionsKNK.closeTargetWindow - not nodeCT");
 		return;
