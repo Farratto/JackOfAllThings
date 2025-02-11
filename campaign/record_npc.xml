@@ -5,13 +5,14 @@
 -->
 <root>
 	<windowclass name="npc" merge="join">
-		<gmexport>npc</gmexport>
+		<gmexport>npc</gmexport>>
 		<tab merge="add">
-			<name>tab_inventory</name>
+			<name>inventory</name>
 			<resource>tab_inventory</resource>
-			<class>npc_inventory</class>
+			<class>charsheet_inventory</class>
 			<embed />
 		</tab>
+<!--
 		<script>
 			function onIDChanged()
 				super.onIDChanged();
@@ -21,37 +22,36 @@
 				end
 			end
 		</script>
+-->
+		<script>
+			function onInit()
+				if super and super.onInit then super.onInit() end
+				if DataOptionsKNK.hasExtension('MapParcel') then
+					tabs.removeTabByName('inventory');
+				end
+			end
+		</script>
 	</windowclass>
 
-	<windowclass name="npc_inventory">
-		<margins>0,3,0,0</margins>
+	<windowclass name="charsheet_inventory_contents" merge="join">
+		<sheetdata>
+			<sub_content_top name="inv_powers">
+				<class>npc_inventory_powers</class>
+			</sub_content_top>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="npc_inventory_powers">
+		<margins control="0,0,0,2" />
 		<script file="campaign/scripts/npc_inventory.lua" />
 		<sheetdata>
-			<genericcontrol name="inventory_iedit">
-				<script>
-					function getValue()
-						return false;
-					end
-				</script>
-				<anchored width="0" height="0" position="insidetopleft" />
-			</genericcontrol>
-
-			<subwindow name="contents">
-				<anchored>
-					<top offset="0" />
-					<left offset="0" />
-					<right offset="-15" />
-				</anchored>
-				<class>charsheet_inventory_contents</class>
-				<activate />
-				<fastinit />
-			</subwindow>
+			<anchor_content_top />
 
 			<label_charframetop name="powerstitle">
-				<anchored height="20">
-					<top parent="contents" anchor="bottom" offset="10" />
+				<anchored to="contentanchor" height="20">
+					<top relation="relative" offset="8" postoffset="8" />
 					<left offset="15" />
-					<right offset="-25" />
+					<right offset="-10" />
 				</anchored>
 				<static textres="char_label_powers" />
 				<icons>char_powers</icons>

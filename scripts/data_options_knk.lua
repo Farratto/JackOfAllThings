@@ -5,12 +5,14 @@
 -- luacheck: globals handleCloseTargetWindow getControllingClient sendOpenTargetWindow openTargetWindow
 -- luacheck: globals closeTargetWindow sendCloseTargetWindow checkOpenTargetWindow getRootCommander
 -- luacheck: globals fonDoubleClick onDoubleClickJOAT handlePictureRequest createPictureItemSelective
+-- luacheck: globals hasExtension
 
 OOB_MSGTYPE_TRGTWNDW = "targetwindow";
 OOB_MSGTYPE_CLOSETRGTWNDW = "closetargetwindow";
 OOB_MSGTYPE_REQUEST_PIC = 'request_picture';
 
 fonDoubleClick = '';
+local tExtensions = {};
 
 function onInit()
 	registerOptions();
@@ -44,6 +46,17 @@ function registerOptions()
 	OptionsManager.registerOptionData({	sKey = 'AUTO_SHARE_PICS', sGroupRes = 'option_header_knk', tCustom = {
 		default = "on" }
 	});
+end
+
+function hasExtension(sExtName)
+	if not tExtensions[1] then tExtensions = Extension.getExtensions() end
+	if not sExtName then return end
+	for _,sExtension in ipairs(tExtensions) do
+		if sExtension == sExtName then
+			return true;
+		end
+	end
+	return false;
 end
 
 function checkOpenTargetWindow(nodeCT)
@@ -168,11 +181,12 @@ function openTargetWindow(nodeCT)
 	if not nodeCT then
 		nodeCT = CombatManager.getActiveCT();
 	end
-	local wTargets = Interface.findWindow('window_targets', nodeCT);
+	--local wTargets = Interface.findWindow('window_targets', nodeCT);
+	local wTargets = Interface.openWindow('window_targets', nodeCT);
 	if wTargets then
 		wTargets.bringToFront();
-	else
-		Interface.openWindow('window_targets', nodeCT);
+	--else
+	--	Interface.openWindow('window_targets', nodeCT);
 	end
 end
 

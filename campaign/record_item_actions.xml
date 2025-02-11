@@ -9,13 +9,12 @@
 		<script file="campaign/scripts/item_power.lua" />
 		<sheetdata>
 			<string_poweritem_header_name name="name" merge="delete" />
+			<button_abjuration name="button_abjuration" merge="delete" />
+			<list_poweraction_mini name="actionsmini" merge="delete" />
 <!--
-			<genericcontrol name="rightanchor">
-				<anchored height="0" width="0">
-					<top offset="2" />
-					<right />
-				</anchored>
-			</genericcontrol>
+			<string_poweritem_header_name name="name" merge="join">
+				<invisible />
+			</string_poweritem_header_name>
 -->
 			<linkcontrol name="shortcut">
 				<anchored to="rightanchor" width="20" height="20">

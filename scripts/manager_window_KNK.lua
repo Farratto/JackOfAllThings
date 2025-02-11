@@ -37,18 +37,16 @@ function onClose()
 end
 
 function checkForKNK()
-	local tExtensions = Extension.getExtensions()
-	for _,sExtension in ipairs(tExtensions) do
-		if sExtension == 'KitNKaboodle' then
-			Interface.openWindow('please_disable', '');
-			return true
-		end
+	if DataOptionsKNK.hasExtension('KitNKaboodle') then
+		local wAnnoy = Interface.openWindow('please_disable', '');
+		if wAnnoy then wAnnoy.bringToFront() end
+		return true;
 	end
 	local wWarning = Interface.findWindow('please_disable', '');
 	if wWarning then
 		wWarning.close();
 	end
-	return false
+	return false;
 end
 
 function handleHoverReorder(winTarget, bOnControl)
