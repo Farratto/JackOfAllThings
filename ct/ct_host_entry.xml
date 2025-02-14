@@ -8,6 +8,16 @@
 		<script>
 			function onActiveChanged()
 				self.onSectionChanged("active", true);
+				if DataOptionsKNK.hasExtension('5e Legendary Assistant') then
+					-- Reset the number of Legendary actions used at start of actors turn (if available)
+					local activeactor=active.getValue()
+					if activeactor==1 then
+						local actorNode=getDatabaseNode()
+						DB.setValue(actorNode,"legendaryassistant.legendaryactions","number",0)
+					end
+					--Display or hide legendary section as needed
+					self.onSectionChanged("legendary");
+				end
 			end
 			function getSectionToggle(sKey)
 				local bResult = false;

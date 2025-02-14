@@ -40,6 +40,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* v3.4.2: Negative interaction with Legendary Assistant. FIXED
 * v3.4.1: Negative interaction with Arcane Ward ext. FIXED
 * v3.4.0: Added option to keep targeting window open on turn change
 * v3.3.4: Disabled inventory tab on NPCs. This is functionality is covered by Map Parcels extension.
