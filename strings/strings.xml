@@ -68,5 +68,6 @@
 	<string name="item_group_title">Item Group</string>
 	<string name="targets_title">Targets</string>
 	<string name="ct_tooltip_targetswindow">Double-click to open Targets Window</string>
-
+	<string name="tooltip_expand_all">Expand All</string>
+	<string name="tooltip_collapse_all">Collapse All</string>
 </root>

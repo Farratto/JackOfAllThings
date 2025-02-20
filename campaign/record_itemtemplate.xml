@@ -22,9 +22,7 @@
 		</tab>
 		<script>
 			function onStateChanged()
-				super.onStateChanged();
-				-- Im commenting out just in case a new problem arises later.  This is throwing nil errors.
-				-- sub_version.subwindow.update()
+				if super and super.onStateChanged then super.onStateChanged() end
 			end
 		</script>
 	</windowclass>

@@ -11,11 +11,12 @@
 * Equipped Effects. When the two extensions are used in conjunction, the power automation feature of Equipped Effects will add the power to the item.
 * Automatic Effects data. Leverages data in Automatic effects to automate item recharge configuration for items equipped while using Equipped Effects and Clock Adjuster.
 * Targeting Window. Huge icons. Option to open automatically on turn defaulted to off. Otherwise open by double-clicking target icon within CT targetting tab.
+* Collapse all and expand all buttons on PC actions tab. Adds collapsibility to Spell Slots and Generic Actions headings.
 
 ### Other Extensions
 
 Care has been taken to avoid negative interactions with other extensions.  Current extension support includes:
-* Equipped Items, Advanced Effects, Map Parcels, Clock Adjuster, Combat Automation, 5e Automatic Effects.
+* Equipped Items, Advanced Effects, Map Parcels, Clock Adjuster, Combat Automation, 5e Automatic Effects, Generic Actions.
 
 If you find any negative interactions with other extensions, please let the maintainer know on the forums or Discord.
 
@@ -40,6 +41,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* v3.5.0: Expand/Collapse all buttons added to Actions tab. Actions added by JoAT are now placed above Generic Actions.
 * v3.4.2: Negative interaction with Legendary Assistant. FIXED
 * v3.4.1: Negative interaction with Arcane Ward ext. FIXED
 * v3.4.0: Added option to keep targeting window open on turn change

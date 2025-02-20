@@ -17,8 +17,7 @@
 				<class>char_item_power_list</class>
 				<listid>1</listid>
 			</subwindow>
-
-			<subwindow name="item_actions">
+			<subwindow name="item_actions" insertbefore="generic_actions">
 				<anchored>
 					<top parent="contentanchor" anchor="bottom" relation="relative" offset="0" />
 					<left />
@@ -28,6 +27,261 @@
 				<fastinit />
 				<class>char_item_power_list</class>
 			</subwindow>
+			<label_charframetop name="generic_actions" merge="join">
+				<anchored height="20">
+					<top parent="contentanchor" anchor="bottom" relation="relative" offset="0" />
+					<left offset="15" />
+					<right offset="-10" />
+				</anchored>
+				<invisible />
+				<script>
+					function onInit()
+						if DataOptionsKNK.hasExtension('GenericActions') then
+							setVisible(true);
+						end
+						if super and super.onInit then super.onInit() end
+					end
+					function onClickDown()
+						if super and super.onClickDown then
+							return super.onClickDown();
+						end
+						return true;
+					end
+					function onClickRelease()
+						if super and super.onClickRelease then
+							return super.onClickRelease();
+						end
+						if getFont() == "subwindowsmalltitle_disabled" then
+							setFont("subwindowsmalltitle");
+							window.sub_generic_actions.setVisible(true);
+						else
+							setFont("subwindowsmalltitle_disabled");
+							window.sub_generic_actions.setVisible(false);
+						end
+						return true;
+					end
+				</script>
+			</label_charframetop>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="power_page" merge="join">
+		<sheetdata>
+			<list_powers name="powers" merge="join">
+				<script>
+					aFilters = {};
+					function onHeaderToggle(wh,bForce)
+						local sCategory = window.getWindowSort(wh);
+						if bForce or (bForce ~= false and aFilters[sCategory]) then
+							aFilters[sCategory] = nil;
+							wh.name.setFont("subwindowsmalltitle");
+						else
+							aFilters[sCategory] = true;
+							wh.name.setFont("subwindowsmalltitle_disabled");
+						end
+						applyFilter();
+					end
+					function onFilter(w)
+						if w.getClass() == "power_group_header" then
+							return w.getFilter();
+						end
+						-- Check to see if this category is hidden
+						local sCategory = window.getWindowSort(w);
+						if aFilters[sCategory] then
+							return false;
+						end
+						return w.getFilter();
+					end
+				</script>
+			</list_powers>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="charsheet_actions" merge="join">
+		<sheetdata>
+			<button_expand_base name="expand_all" >
+				<anchored to="powermode" width="20" height="20" >
+					<top />
+					<left anchor="right" offset="8" />
+				</anchored>
+				<tooltip textres="tooltip_expand_all" />
+ 				<script>
+					function onButtonPress()
+						local winContent = window.content.subwindow;
+						if winContent.effectstitle then
+							winContent.effectstitle.setFont("subwindowsmalltitle");
+							winContent.effects.setVisible(true);
+							winContent.weapon_header.setAnchor('top', 'contentanchor', 'bottom', 'relative'
+								, 85
+							);
+						end
+						winContent.weapon_header.setFont("subwindowsmalltitle");
+						winContent.weapons.setVisible(true);
+						for _,win in pairs(winContent.item_actions_top.subwindow.list.getWindows()) do
+							win.name.setFont("subwindowsmalltitle");
+							win.powerlist.setVisible(true);
+						end
+						if winContent.spellslots_cast.subwindow.slotstitle then
+							winContent.spellslots_cast.subwindow.slotstitle.setFont("subwindowsmalltitle");
+							winContent.spellslots_cast.subwindow.onModeChanged();
+						end
+						if winContent.spellslots_prep.subwindow.slotstitle then
+							winContent.spellslots_prep.subwindow.slotstitle.setFont("subwindowsmalltitle");
+							for _,control in pairs(winContent.spellslots_prep.subwindow.getControls()) do
+								control.setVisible(true);
+							end
+						end
+						if winContent.resources then
+							winContent.resources.subwindow.resourcestitle.setFont("subwindowsmalltitle");
+							winContent.resources.subwindow.list.setVisible(true);
+						end
+						for k,win in pairs(winContent.actions.subwindow.powers.getWindows()) do
+							if win.getClass() == "power_group_header" then
+								winContent.actions.subwindow.powers.onHeaderToggle(win,true);
+							end
+						end
+						for _,win in pairs(winContent.item_actions.subwindow.list.getWindows()) do
+							win.name.setFont("subwindowsmalltitle");
+							win.powerlist.setVisible(true);
+						end
+						if winContent.sub_generic_actions then
+							winContent.generic_actions.setFont("subwindowsmalltitle");
+							winContent.sub_generic_actions.setVisible(true);
+						end
+					end
+				</script>
+			</button_expand_base>
+			<button_collapse_base name="collapse_all" >
+				<anchored to="expand_all" width="20" height="20">
+					<top />
+					<left anchor="right" offset="7" />
+				</anchored>
+				<tooltip textres="tooltip_collapse_all" />
+				<script>
+					function onButtonPress()
+						local winContent = window.content.subwindow;
+						if winContent.effectstitle then
+							winContent.effectstitle.setFont("subwindowsmalltitle_disabled");
+							winContent.effects.setVisible(false);
+							winContent.weapon_header.setAnchor('top', 'contentanchor', 'bottom', 'relative'
+								, 45
+							);
+						end
+						winContent.weapon_header.setFont("subwindowsmalltitle_disabled");
+						winContent.weapons.setVisible(false);
+						for _,win in pairs(winContent.item_actions_top.subwindow.list.getWindows()) do
+							win.name.setFont("subwindowsmalltitle_disabled");
+							win.powerlist.setVisible(false);
+						end
+						if winContent.spellslots_cast.subwindow.slotstitle then
+							winContent.spellslots_cast.subwindow.slotstitle.setFont(
+								"subwindowsmalltitle_disabled"
+							);
+						end
+						if winContent.spellslots_cast.subwindow.spellslots_label then
+							winContent.spellslots_cast.subwindow.spellslots_label.setVisible(false);
+						end
+						if winContent.spellslots_cast.subwindow.spellslots then
+							winContent.spellslots_cast.subwindow.spellslots.setVisible(false);
+						end
+						if winContent.spellslots_cast.subwindow.pactmagicslots_label then
+							winContent.spellslots_cast.subwindow.pactmagicslots_label.setVisible(false);
+						end
+						if winContent.spellslots_cast.subwindow.pactmagicslots then
+							winContent.spellslots_cast.subwindow.pactmagicslots.setVisible(false);
+						end
+						if winContent.spellslots_prep.subwindow.slotstitle then
+							winContent.spellslots_prep.subwindow.slotstitle.setFont(
+								"subwindowsmalltitle_disabled"
+							);
+							for _,control in pairs(winContent.spellslots_prep.subwindow.getControls()) do
+								if control.getName() ~= 'slotstitle' then control.setVisible(false) end
+							end
+						end
+						if winContent.resources then
+							winContent.resources.subwindow.resourcestitle.setFont(
+								"subwindowsmalltitle_disabled"
+							);
+							winContent.resources.subwindow.list.setVisible(false);
+						end
+						for _,win in pairs(winContent.actions.subwindow.powers.getWindows()) do
+							if win.getClass() == "power_group_header" then
+								winContent.actions.subwindow.powers.onHeaderToggle(win,false);
+							end
+						end
+						for _,win in pairs(winContent.item_actions.subwindow.list.getWindows()) do
+							win.name.setFont("subwindowsmalltitle_disabled");
+							win.powerlist.setVisible(false);
+						end
+						if winContent.sub_generic_actions then
+							winContent.generic_actions.setFont("subwindowsmalltitle_disabled");
+							winContent.sub_generic_actions.setVisible(false);
+						end
+					end
+				</script>
+			</button_collapse_base>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="power_slots_cast" merge="join">
+		<sheetdata>
+			<label_charframetop name="slotstitle" merge="join">
+				<script>
+					function onClickDown()
+						if super and super.onClickDown then
+							return super.onClickDown();
+						end
+						return true;
+					end
+					function onClickRelease()
+						if super and super.onClickRelease then
+							return super.onClickRelease();
+						end
+						if getFont() == "subwindowsmalltitle_disabled" then
+							setFont("subwindowsmalltitle");
+							if window.onModeChanged then window.onModeChanged() end
+						else
+							setFont("subwindowsmalltitle_disabled");
+							if window.spellslots_label then window.spellslots_label.setVisible(false) end
+							if window.spellslots then window.spellslots.setVisible(false) end
+							if window.pactmagicslots_label then
+								window.pactmagicslots_label.setVisible(false);
+							end
+							if window.pactmagicslots then window.pactmagicslots.setVisible(false) end
+						end
+						return true;
+					end
+				</script>
+			</label_charframetop>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="power_slots_prep" merge="join">
+		<sheetdata>
+			<label_charframetop name="slotstitle" merge="join">
+				<script>
+					function onClickDown()
+						if super and super.onClickDown then
+							return super.onClickDown();
+						end
+						return true;
+					end
+					function onClickRelease()
+						if super and super.onClickRelease then
+							return super.onClickRelease();
+						end
+						if getFont() == "subwindowsmalltitle_disabled" then
+							setFont("subwindowsmalltitle");
+							for _,control in pairs(window.getControls()) do
+								control.setVisible(true);
+							end
+						else
+							setFont("subwindowsmalltitle_disabled");
+							for _,control in pairs(window.getControls()) do
+								if control.getName() ~= 'slotstitle' then control.setVisible(false) end
+							end
+						end
+						return true;
+					end
+				</script>
+			</label_charframetop>
 		</sheetdata>
 	</windowclass>
 
@@ -62,6 +316,7 @@
 				<class>item</class>
 				<readonly />
 			</linkcontrol>
+<!--
 			<stringfield name="name">
 				<script>
 					function onInit()
@@ -94,6 +349,57 @@
 				</anchored>
 				<frame name="metalplate" offset="10,2,10,2"/>
 				<font>subwindowsmalltitle_disabled</font>
+				<center />
+				<nodrag />
+				<readonly />
+			</stringfield>
+-->
+			<stringfield name="name">
+				<script>
+					function onInit()
+						if super and super.onInit then super.onInit() end
+
+						if not icons then icons = {} end
+						table.insert(icons, 'char_inventory');
+						if icons and icons[1] then
+							setIcon(icons[1]);
+						end
+
+						window.powerlist.setVisible(true);
+					end
+					function setIcon(sIcon)
+						local wgt = findWidget("icon");
+						if wgt then
+							wgt.destroy();
+						end
+						if sIcon then
+							widget = addBitmapWidget({ name="icon", icon = sIcon, position="topleft"
+								, x = 2, y = 8
+							});
+						end
+					end
+					function onClickDown()
+						return true;
+					end
+					function onClickRelease()
+						local bVisible = window.powerlist.isVisible ();
+						if bVisible then
+							setFont("subwindowsmalltitle_disabled");
+							window.powerlist.setVisible(false);
+						else
+							setFont("subwindowsmalltitle");
+							window.powerlist.setVisible(true);
+						end
+						return true;
+					end
+				</script>
+				<anchored height="20">
+					<top offset="10" />
+					<left offset="10" />
+					<right parent="shortcut" anchor="left" offset="-10" />
+				</anchored>
+				<frame name="metalplate" offset="10,2,10,2"/>
+				<font>subwindowsmalltitle</font>
 				<center />
 				<nodrag />
 				<readonly />
