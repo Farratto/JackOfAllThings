@@ -82,6 +82,7 @@
 					<right />
 				</anchored>
 			</genericcontrol>
+<!--
 			<linkcontrol name="shortcut">
 				<anchored to="rightanchor" width="20" height="20">
 					<top />
@@ -90,6 +91,10 @@
 				<class>power</class>
 				<readonly />
 			</linkcontrol>
+-->
+			<linkc_listitem_left name="shortcut">
+				<class>power</class>
+			</linkc_listitem_left>
 			<button_idelete name="idelete">
 				<anchored to="rightanchor">
 					<top />

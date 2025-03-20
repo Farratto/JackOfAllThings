@@ -41,6 +41,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* v3.5.1: FIXED: ineractions with Winnowing Pursuits. slight aesthetic improvements.
 * v3.5.0: Expand/Collapse all buttons added to Actions tab. Actions added by JoAT are now placed above Generic Actions.
 * v3.4.2: Negative interaction with Legendary Assistant. FIXED
 * v3.4.1: Negative interaction with Arcane Ward ext. FIXED

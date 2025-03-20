@@ -13,9 +13,9 @@ function onInit()
 	handleDropReorderOriginal = WindowManager.handleDropReorder;
 	WindowManager.handleDropReorder = handleDropReorder;
 	if Session.IsHost then
-		origlSaveWindowState = WindowSaveManager.saveWindowState
-		WindowSaveManager.saveWindowState = overrideSaveWindowState
-		checkForKNK()
+		origlSaveWindowState = WindowSaveManager.saveWindowState;
+		WindowSaveManager.saveWindowState = overrideSaveWindowState;
+		checkForKNK();
 	end
 end
 
@@ -24,8 +24,8 @@ function overrideSaveWindowState()
 	if wWarning then
 		wWarning.close();
 	end
-	origlSaveWindowState()
-	WindowSaveManager.saveWindowState = origlSaveWindowState
+	origlSaveWindowState();
+	WindowSaveManager.saveWindowState = origlSaveWindowState;
 end
 
 function onClose()
@@ -33,7 +33,7 @@ function onClose()
 	if wWarning then
 		wWarning.close();
 	end
-	WindowSaveManager.saveWindowState = origlSaveWindowState
+	WindowSaveManager.saveWindowState = origlSaveWindowState;
 end
 
 function checkForKNK()

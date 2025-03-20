@@ -107,6 +107,8 @@
  				<script>
 					function onButtonPress()
 						local winContent = window.content.subwindow;
+
+						--MNM Charsheet Effects Display
 						if winContent.effectstitle then
 							winContent.effectstitle.setFont("subwindowsmalltitle");
 							winContent.effects.setVisible(true);
@@ -114,12 +116,27 @@
 								, 85
 							);
 						end
+
 						winContent.weapon_header.setFont("subwindowsmalltitle");
 						winContent.weapons.setVisible(true);
-						for _,win in pairs(winContent.item_actions_top.subwindow.list.getWindows()) do
+
+						local tJoatItemWindows = winContent.item_actions_top.subwindow.list.getWindows();
+						for _,win in pairs(tJoatItemWindows) do
 							win.name.setFont("subwindowsmalltitle");
 							win.powerlist.setVisible(true);
 						end
+						if tJoatItemWindows[1] and window.applySearchAndFilter then
+							window.applySearchAndFilter();
+						end
+						tJoatItemWindows = winContent.item_actions.subwindow.list.getWindows();
+						for _,win in pairs(tJoatItemWindows) do
+							win.name.setFont("subwindowsmalltitle");
+							win.powerlist.setVisible(true);
+						end
+						if tJoatItemWindows[1] and window.applySearchAndFilter then
+							window.applySearchAndFilter();
+						end
+
 						if winContent.spellslots_cast.subwindow.slotstitle then
 							winContent.spellslots_cast.subwindow.slotstitle.setFont("subwindowsmalltitle");
 							winContent.spellslots_cast.subwindow.onModeChanged();
@@ -130,19 +147,20 @@
 								control.setVisible(true);
 							end
 						end
+
+						--Capital Gains
 						if winContent.resources then
 							winContent.resources.subwindow.resourcestitle.setFont("subwindowsmalltitle");
 							winContent.resources.subwindow.list.setVisible(true);
 						end
+
+						--native FGU
 						for k,win in pairs(winContent.actions.subwindow.powers.getWindows()) do
 							if win.getClass() == "power_group_header" then
 								winContent.actions.subwindow.powers.onHeaderToggle(win,true);
 							end
 						end
-						for _,win in pairs(winContent.item_actions.subwindow.list.getWindows()) do
-							win.name.setFont("subwindowsmalltitle");
-							win.powerlist.setVisible(true);
-						end
+
 						if winContent.sub_generic_actions then
 							winContent.generic_actions.setFont("subwindowsmalltitle");
 							winContent.sub_generic_actions.setVisible(true);
@@ -159,6 +177,8 @@
 				<script>
 					function onButtonPress()
 						local winContent = window.content.subwindow;
+
+						--MNM Charsheet Effects Display
 						if winContent.effectstitle then
 							winContent.effectstitle.setFont("subwindowsmalltitle_disabled");
 							winContent.effects.setVisible(false);
@@ -166,12 +186,20 @@
 								, 45
 							);
 						end
+
 						winContent.weapon_header.setFont("subwindowsmalltitle_disabled");
 						winContent.weapons.setVisible(false);
+
+						--JoAT items
 						for _,win in pairs(winContent.item_actions_top.subwindow.list.getWindows()) do
 							win.name.setFont("subwindowsmalltitle_disabled");
 							win.powerlist.setVisible(false);
 						end
+						for _,win in pairs(winContent.item_actions.subwindow.list.getWindows()) do
+							win.name.setFont("subwindowsmalltitle_disabled");
+							win.powerlist.setVisible(false);
+						end
+
 						if winContent.spellslots_cast.subwindow.slotstitle then
 							winContent.spellslots_cast.subwindow.slotstitle.setFont(
 								"subwindowsmalltitle_disabled"
@@ -197,21 +225,22 @@
 								if control.getName() ~= 'slotstitle' then control.setVisible(false) end
 							end
 						end
+
+						--Capital Gains
 						if winContent.resources then
 							winContent.resources.subwindow.resourcestitle.setFont(
 								"subwindowsmalltitle_disabled"
 							);
 							winContent.resources.subwindow.list.setVisible(false);
 						end
+
+						--native FGU
 						for _,win in pairs(winContent.actions.subwindow.powers.getWindows()) do
 							if win.getClass() == "power_group_header" then
 								winContent.actions.subwindow.powers.onHeaderToggle(win,false);
 							end
 						end
-						for _,win in pairs(winContent.item_actions.subwindow.list.getWindows()) do
-							win.name.setFont("subwindowsmalltitle_disabled");
-							win.powerlist.setVisible(false);
-						end
+
 						if winContent.sub_generic_actions then
 							winContent.generic_actions.setFont("subwindowsmalltitle_disabled");
 							winContent.sub_generic_actions.setVisible(false);
@@ -308,6 +337,7 @@
 		<margins control="0,0,0,5" />
 		<script file="campaign/scripts/char_item_group.lua" />
 		<sheetdata>
+<!--
 			<linkcontrol name="shortcut">
 				<anchored width="20" height="20">
 					<top offset="10" />
@@ -316,44 +346,11 @@
 				<class>item</class>
 				<readonly />
 			</linkcontrol>
-<!--
-			<stringfield name="name">
-				<script>
-					function onInit()
-						if super and super.onInit then
-							super.onInit();
-						end
-
-						local widget = addBitmapWidget("char_inventory");
-						widget.setPosition("topleft", 2, 8);
-					end
-					function onClickDown()
-						return true;
-					end
-					function onClickRelease()
-						local bVisible = window.powerlist.isVisible ();
-						if bVisible then
-							setFont("subwindowsmalltitle_disabled");
-							window.powerlist.setVisible(false);
-						else
-							setFont("subwindowsmalltitle");
-							window.powerlist.setVisible(true);
-						end
-						return true;
-					end
-				</script>
-				<anchored height="20">
-					<top offset="10" />
-					<left offset="15" />
-					<right parent="shortcut" anchor="left" offset="-10" />
-				</anchored>
-				<frame name="metalplate" offset="10,2,10,2"/>
-				<font>subwindowsmalltitle_disabled</font>
-				<center />
-				<nodrag />
-				<readonly />
-			</stringfield>
 -->
+			<anchor_listitem_left_sm />
+			<linkc_listitem_left name="shortcut">
+				<class>power</class>
+			</linkc_listitem_left>
 			<stringfield name="name">
 				<script>
 					function onInit()
@@ -394,9 +391,14 @@
 					end
 				</script>
 				<anchored height="20">
+<!--
 					<top offset="10" />
 					<left offset="10" />
 					<right parent="shortcut" anchor="left" offset="-10" />
+-->
+					<top offset="2" />
+					<left parent="shortcut" anchor="right" offset="15" />
+					<right offset="-10" />
 				</anchored>
 				<frame name="metalplate" offset="10,2,10,2"/>
 				<font>subwindowsmalltitle</font>
@@ -410,6 +412,23 @@
 					<left offset="5" />
 					<right />
 				</anchored>
+<!--
+				<script>
+					sSearch = '';
+					function onFilter(w)
+						Debug.console("sSearch = "..sSearch);
+						if sSearch == '' then return true end
+						local sSearchLower = string.lower(sSearch);
+						Debug.console("sSearchLower = "..sSearchLower);
+						local sPowerName = string.lower(DB.getValue(w.getDatabaseNode(),'name',''));
+						Debug.console("sPowerName = "..sPowerName);
+
+						if string.match(sPowerName, sSearchLower) then return true end
+						Debug.console("returned false");
+						return false;
+					end
+				</script>
+-->
 				<sortby><field>name</field></sortby>
 				<class>item_power</class>
 				<footer>footer_wide</footer>
@@ -461,15 +480,20 @@
 		<margins control="0,0,0,5" />
 		<sheetdata>
 			<linkcontrol name="shortcut">
-				<anchored position="insidetopright" offset="-2,0" width="20" height="20" />
+<!--				<anchored position="insidetopright" offset="-2,0" width="20" height="20" /> -->
+				<anchored position="insidetopleft" offset="-2,0" width="20" height="20" />
 				<class>item</class>
 				<readonly />
 			</linkcontrol>
 			<simplestring name="name">
 				<anchored>
 					<top offset="" />
+<!--
 					<right parent="shortcut" anchor="left" offset="-10" />
 					<left offset="5" />
+-->
+					<left parent="shortcut" anchor="right" offset="10" />
+					<right offset="-5" />
 				</anchored>
 				<multilinespacing>20</multilinespacing>
 				<nodrag />
