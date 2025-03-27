@@ -1,14 +1,15 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
--- luacheck: globals getItemSourceType addEquippedSpellPC beginRecharging onTimeChanged rechargeItemPowers
--- luacheck: globals getRechargeAmount calculateDailyRecharge handleItemRecharge shouldRollRecharge rollRecharge
--- luacheck: globals onRechargeRoll distributeCharges handleItemChargesUsed destroyDischargedItem
--- luacheck: globals beginRollDischargedItem handleRollDischargedItem onDischargeRoll rechargeDischargedItem
--- luacheck: globals updateDischargeCount showCarriedOrEquipped shouldShowItemPowers getItemGroupName
--- luacheck: globals beginCreatingItemGroup handleItemGroupCreation countCharges getActorResourceItem
--- luacheck: globals isChargeResource getCurrentChargeResource getAvailableChargeResource
--- luacheck: globals getItemResourceChargeSetters addChargeResourceChangedHandler removeChargeResourceChangedHandler
+--luacheck: globals getItemSourceType addEquippedSpellPC beginRecharging onTimeChanged rechargeItemPowers
+--luacheck: globals getRechargeAmount calculateDailyRecharge handleItemRecharge shouldRollRecharge
+--luacheck: globals onRechargeRoll distributeCharges handleItemChargesUsed destroyDischargedItem
+--luacheck: globals beginRollDischargedItem handleRollDischargedItem onDischargeRoll rechargeDischargedItem
+--luacheck: globals updateDischargeCount showCarriedOrEquipped shouldShowItemPowers getItemGroupName
+--luacheck: globals beginCreatingItemGroup handleItemGroupCreation countCharges getActorResourceItem
+--luacheck: globals isChargeResource getCurrentChargeResource getAvailableChargeResource rollRecharge
+--luacheck: globals getItemResourceChargeSetters addChargeResourceChangedHandler
+--luacheck: globals removeChargeResourceChangedHandler
 
 OOB_MSGTYPE_RECHARGE_ITEM = "rechargeitem";
 OOB_MSGTYPE_CREATE_ITEM_GROUP = "createitemgroup";
@@ -50,12 +51,12 @@ function onInit()
 			TimeManager.addTimeChangeFunction(onTimeChanged);
 		end
 
-		if not OptionsManager.isOption("IPAE", "off") then
+		--if not OptionsManager.isOption("IPAE", "off") then
 			if EquippedEffectsManager then
 				addEquippedSpellPCOriginal = EquippedEffectsManager.addEquippedSpellPC;
 				EquippedEffectsManager.addEquippedSpellPC = addEquippedSpellPC;
 			end
-		end
+		--end
 	end
 
 	if ResourceManager then
@@ -96,7 +97,11 @@ function getItemSourceType(vNode)
 	return sResult;
 end
 
-function addEquippedSpellPC(_, nodeCarriedItem, nodeSpell, _)
+function addEquippedSpellPC(nodeActor, nodeCarriedItem, nodeSpell, sName)
+	if OptionsManager.isOption('IPAE', 'off') then
+		return addEquippedSpellPCOriginal(nodeActor, nodeCarriedItem, nodeSpell, sName);
+	end
+
 	-- Add the new power if the item has not already been configured.
 	if DB.getChildCount(nodeCarriedItem, "powers") == 0 then
 		nodeItemBeingEquiped = nodeCarriedItem; -- Track that the item is being processed

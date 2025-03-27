@@ -250,6 +250,161 @@
 			</button_collapse_base>
 		</sheetdata>
 	</windowclass>
+	<!-- FloatingTabs compatibility -->
+	<windowclass name="charsheet_actionsft" merge="join">
+		<sheetdata>
+			<button_expand_base name="expand_all" >
+				<anchored to="powermode" width="20" height="20" >
+					<top />
+					<left anchor="right" offset="8" />
+				</anchored>
+				<tooltip textres="tooltip_expand_all" />
+ 				<script>
+					function onButtonPress()
+						local winContent = window.contents.subwindow;
+
+						--MNM Charsheet Effects Display
+						if winContent.effectstitle then
+							winContent.effectstitle.setFont("subwindowsmalltitle");
+							winContent.effects.setVisible(true);
+							winContent.weapon_header.setAnchor('top', 'contentanchor', 'bottom', 'relative'
+								, 85
+							);
+						end
+
+						winContent.weapon_header.setFont("subwindowsmalltitle");
+						winContent.weapons.setVisible(true);
+
+						local tJoatItemWindows = winContent.item_actions_top.subwindow.list.getWindows();
+						for _,win in pairs(tJoatItemWindows) do
+							win.name.setFont("subwindowsmalltitle");
+							win.powerlist.setVisible(true);
+						end
+						if tJoatItemWindows[1] and window.applySearchAndFilter then
+							window.applySearchAndFilter();
+						end
+						tJoatItemWindows = winContent.item_actions.subwindow.list.getWindows();
+						for _,win in pairs(tJoatItemWindows) do
+							win.name.setFont("subwindowsmalltitle");
+							win.powerlist.setVisible(true);
+						end
+						if tJoatItemWindows[1] and window.applySearchAndFilter then
+							window.applySearchAndFilter();
+						end
+
+						if winContent.spellslots_cast.subwindow.slotstitle then
+							winContent.spellslots_cast.subwindow.slotstitle.setFont("subwindowsmalltitle");
+							winContent.spellslots_cast.subwindow.onModeChanged();
+						end
+						if winContent.spellslots_prep.subwindow.slotstitle then
+							winContent.spellslots_prep.subwindow.slotstitle.setFont("subwindowsmalltitle");
+							for _,control in pairs(winContent.spellslots_prep.subwindow.getControls()) do
+								control.setVisible(true);
+							end
+						end
+
+						--Capital Gains
+						if winContent.resources then
+							winContent.resources.subwindow.resourcestitle.setFont("subwindowsmalltitle");
+							winContent.resources.subwindow.list.setVisible(true);
+						end
+
+						--native FGU
+						for k,win in pairs(winContent.actions.subwindow.powers.getWindows()) do
+							if win.getClass() == "power_group_header" then
+								winContent.actions.subwindow.powers.onHeaderToggle(win,true);
+							end
+						end
+
+						if winContent.sub_generic_actions then
+							winContent.generic_actions.setFont("subwindowsmalltitle");
+							winContent.sub_generic_actions.setVisible(true);
+						end
+					end
+				</script>
+			</button_expand_base>
+			<button_collapse_base name="collapse_all" >
+				<anchored to="expand_all" width="20" height="20">
+					<top />
+					<left anchor="right" offset="7" />
+				</anchored>
+				<tooltip textres="tooltip_collapse_all" />
+				<script>
+					function onButtonPress()
+						local winContent = window.contents.subwindow;
+
+						--MNM Charsheet Effects Display
+						if winContent.effectstitle then
+							winContent.effectstitle.setFont("subwindowsmalltitle_disabled");
+							winContent.effects.setVisible(false);
+							winContent.weapon_header.setAnchor('top', 'contentanchor', 'bottom', 'relative'
+								, 45
+							);
+						end
+
+						winContent.weapon_header.setFont("subwindowsmalltitle_disabled");
+						winContent.weapons.setVisible(false);
+
+						--JoAT items
+						for _,win in pairs(winContent.item_actions_top.subwindow.list.getWindows()) do
+							win.name.setFont("subwindowsmalltitle_disabled");
+							win.powerlist.setVisible(false);
+						end
+						for _,win in pairs(winContent.item_actions.subwindow.list.getWindows()) do
+							win.name.setFont("subwindowsmalltitle_disabled");
+							win.powerlist.setVisible(false);
+						end
+
+						if winContent.spellslots_cast.subwindow.slotstitle then
+							winContent.spellslots_cast.subwindow.slotstitle.setFont(
+								"subwindowsmalltitle_disabled"
+							);
+						end
+						if winContent.spellslots_cast.subwindow.spellslots_label then
+							winContent.spellslots_cast.subwindow.spellslots_label.setVisible(false);
+						end
+						if winContent.spellslots_cast.subwindow.spellslots then
+							winContent.spellslots_cast.subwindow.spellslots.setVisible(false);
+						end
+						if winContent.spellslots_cast.subwindow.pactmagicslots_label then
+							winContent.spellslots_cast.subwindow.pactmagicslots_label.setVisible(false);
+						end
+						if winContent.spellslots_cast.subwindow.pactmagicslots then
+							winContent.spellslots_cast.subwindow.pactmagicslots.setVisible(false);
+						end
+						if winContent.spellslots_prep.subwindow.slotstitle then
+							winContent.spellslots_prep.subwindow.slotstitle.setFont(
+								"subwindowsmalltitle_disabled"
+							);
+							for _,control in pairs(winContent.spellslots_prep.subwindow.getControls()) do
+								if control.getName() ~= 'slotstitle' then control.setVisible(false) end
+							end
+						end
+
+						--Capital Gains
+						if winContent.resources then
+							winContent.resources.subwindow.resourcestitle.setFont(
+								"subwindowsmalltitle_disabled"
+							);
+							winContent.resources.subwindow.list.setVisible(false);
+						end
+
+						--native FGU
+						for _,win in pairs(winContent.actions.subwindow.powers.getWindows()) do
+							if win.getClass() == "power_group_header" then
+								winContent.actions.subwindow.powers.onHeaderToggle(win,false);
+							end
+						end
+
+						if winContent.sub_generic_actions then
+							winContent.generic_actions.setFont("subwindowsmalltitle_disabled");
+							winContent.sub_generic_actions.setVisible(false);
+						end
+					end
+				</script>
+			</button_collapse_base>
+		</sheetdata>
+	</windowclass>
 	<windowclass name="power_slots_cast" merge="join">
 		<sheetdata>
 			<label_charframetop name="slotstitle" merge="join">

@@ -1,7 +1,7 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
--- luacheck: globals nodeBelongsToItem
+--luacheck: globals nodeBelongsToItem
 
 function onInit()
 	ItemManager.setInventoryPaths("charsheet",
