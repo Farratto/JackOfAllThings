@@ -9,7 +9,7 @@
 		<name>Feature: Jack of All Things</name>
 		<version>~dev_version~</version>
 		<loadorder>151</loadorder>
-		<author>MeAndUnique, Farratto, rhagelstrom</author>
+		<author>MeAndUnique</author>
 		<description>Adds support for adding actions to items and giving items to NPCs.</description>
 		<ruleset>
 			<name>5E</name>
@@ -49,7 +49,7 @@
 			function onInit()
 				if PowerUp then
 					PowerUp.registerExtension("Jack of All Things", "~dev_version~", {
-						['message'] = "~dev_version~\~update_notes~"
+						['message'] = "~dev_version~: ~update_notes~"
 					});
 				end
 			end

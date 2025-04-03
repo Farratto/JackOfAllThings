@@ -395,6 +395,7 @@ function destroyDischargedItem(nodeItem, nChargeCount)
 	local nCount = DB.getValue(nodeItem, "count", 1) - 1;
 	local bDeleted = false;
 	if nCount == 0 and OptionsManager.getOption("IDLU") == "on" then
+Debug.printstack();
 		nodeItem.delete();
 		bDeleted = true
 	else
