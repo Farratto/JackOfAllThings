@@ -37,7 +37,7 @@
 		</label_charframetop>
 	</template>
 
-	<template name = "counter_item_power">
+	<template name ="counter_item_power">
 		<buttongroup_counter_power>
 			<script file="campaign/scripts/counter_item_power.lua" />
 		</buttongroup_counter_power>

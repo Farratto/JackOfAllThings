@@ -1,9 +1,11 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
+--super = CoreRPG/campaign/scripts/buttongroup_counter_power_5E.lua
+
 --luacheck: globals getCastValue adjustCounter onChargesChanged calculateTotal calculateUsed getTotalCharges canCast
 --luacheck: globals getChargesUsed onClickRelease onWheel onValueChanged maxslotperrow spacing update updateSlots
---luacheck: globals stateicons
+--luacheck: globals stateicons getPreparedValue setPreparedValue setCastValue
 
 local nodePower;
 local nodeItem;
@@ -11,7 +13,7 @@ local nTotal;
 local nUsed;
 local bWheel = false;
 
-local adjustCounterOriginal;
+--local adjustCounterOriginal;
 local getCastValueOriginal;
 
 local sSheetMode = "";
@@ -38,8 +40,8 @@ function onInit()
 	setAnchoredWidth(nSpacing);
 	--end from super
 
-	adjustCounterOriginal = super.adjustCounter;
-	super.adjustCounter = adjustCounter;
+	--adjustCounterOriginal = super.adjustCounter;
+	--super.adjustCounter = adjustCounter;
 	getCastValueOriginal = super.getCastValue;
 	super.getCastValue = getCastValue;
 
@@ -145,9 +147,10 @@ function onChargesChanged()
 
 	local nodePower = getDatabaseNode();
 	DB.setValue(nodePower, "prepared", "number", nTotal);
-	if super and super.update then
-		super.update("standard", true, nTotal, nUsed, nTotal);
-	end
+	--if super and super.update then
+	--	super.update("standard", true, nTotal, nUsed, nTotal);
+		update("standard", true, nTotal, nUsed, nTotal);
+	--end
 end
 
 function onValueChanged()
@@ -356,5 +359,14 @@ function canCast()
 	else
 		return (self.getCastValue() < self.getPreparedValue());
 	end
+end
+function getPreparedValue()
+	return DB.getValue(window.getDatabaseNode(), "prepared", 0);
+end
+function setPreparedValue(nNewValue)
+	return DB.setValue(window.getDatabaseNode(), "prepared", "number", nNewValue);
+end
+function setCastValue(nNewValue)
+	return DB.setValue(window.getDatabaseNode(), "cast", "number", nNewValue);
 end
 --end from super

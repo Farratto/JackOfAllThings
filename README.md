@@ -41,6 +41,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* v3.5.4: FIXED: broke item charges when fixing nil error from v3.5.3
 * v3.5.3: FIXED: nil error when destroying item
 * v3.5.2: FIXED: Switching from JoAT items to Equipped Effects required restart to take effect. Expand/Collapse all buttons added to Floating tabs.
 * v3.5.1: FIXED: ineractions with Winnowing Pursuits. slight aesthetic improvements.
