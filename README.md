@@ -1,6 +1,6 @@
 ## Jack of All Things
 
-**Current Version**: ~dev_version~ \
+**Current Version**: ~v-dev~ \
 **Updated**: ~date~
 
 * Adds an action tab to items and spells. Allows for editing spell effects without putting the record onto a character.
@@ -16,7 +16,7 @@
 ### Other Extensions
 
 Care has been taken to avoid negative interactions with other extensions.  Current extension support includes:
-* Equipped Items, Advanced Effects, Map Parcels, Clock Adjuster, Combat Automation, 5e Automatic Effects, Generic Actions.
+* Equipped Items, Advanced Effects, Map Parcels, Clock Adjuster, 5e Automatic Effects, Generic Actions.
 
 If you find any negative interactions with other extensions, please let the maintainer know on the forums or Discord.
 
@@ -24,8 +24,8 @@ If you find any negative interactions with other extensions, please let the main
 
 It is recommended that you disable and hide Kit'N'Kaboodle on your Forge account.  And if you have downloaded any releases from github, you should also delete any copies of KitNKaboodle.ext in your extensions folder. \
 Install from the [Fantasy Grounds Forge](https://forge.fantasygrounds.com/shop/items/1959/view). \
-You can find the source code at Farratto's [GitHub](https://github.com/Farratto/JackOfAllThings/releases). \
-You can ask questions at the [Fantasy Grounds Forum](https://www.fantasygrounds.com/forums/showthread.php?83081-Jack-of-All-Trades-for-5e-(rebranding-of-Kit-N-Kaboodle)) thread.
+You can find the source code at Farratto's [GitHub](https://github.com/Farratto/JackOfAllThings). \
+You can ask questions at the [Fantasy Grounds Forum](https://www.fantasygrounds.com/forums/showthread.php?83081) thread.
 
 ### Attribution
 
@@ -41,6 +41,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* v3.5.5: FIXED: negative interaction with Combat Automation extension. Started compatibility updates for FG v4.8.0.
 * v3.5.4: FIXED: broke item charges when fixing nil error from v3.5.3
 * v3.5.3: FIXED: nil error when destroying item
 * v3.5.2: FIXED: Switching from JoAT items to Equipped Effects required restart to take effect. Expand/Collapse all buttons added to Floating tabs.

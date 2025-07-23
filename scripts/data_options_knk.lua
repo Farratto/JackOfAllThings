@@ -1,17 +1,16 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
--- luacheck: globals registerOptions openTargetWindow closeAllTargetWindows handleTargetWindowOpen
--- luacheck: globals handleCloseTargetWindow getControllingClient sendOpenTargetWindow openTargetWindow
--- luacheck: globals closeTargetWindow sendCloseTargetWindow checkOpenTargetWindow getRootCommander
--- luacheck: globals fonDoubleClick onDoubleClickJOAT handlePictureRequest createPictureItemSelective
--- luacheck: globals hasExtension
+--luacheck: globals registerOptions openTargetWindow closeAllTargetWindows handleTargetWindowOpen
+--luacheck: globals handleCloseTargetWindow getControllingClient sendOpenTargetWindow openTargetWindow
+--luacheck: globals closeTargetWindow sendCloseTargetWindow checkOpenTargetWindow getRootCommander
+--luacheck: globals onDoubleClickJOAT handlePictureRequest createPictureItemSelective
+--luacheck: globals hasExtension
 
 OOB_MSGTYPE_TRGTWNDW = "targetwindow";
 OOB_MSGTYPE_CLOSETRGTWNDW = "closetargetwindow";
 OOB_MSGTYPE_REQUEST_PIC = 'request_picture';
 
-fonDoubleClick = '';
 local tExtensions = {};
 
 function onInit()
@@ -21,7 +20,6 @@ function onInit()
 	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_CLOSETRGTWNDW, handleCloseTargetWindow);
 	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_REQUEST_PIC, handlePictureRequest);
 
-	fonDoubleClick = Token.onDoubleClick;
 	Token.onDoubleClick = onDoubleClickJOAT;
 
 	if Session.IsHost then
@@ -103,10 +101,6 @@ end
 
 ---For a given cohort actor, determine the root character node that owns it
 function getRootCommander(rActor)
-	if not rActor then
-		Debug.console("DataOptionsKNK.getRootCommander - rActor doesn't exist");
-		return;
-	end
 	local sRecord = ActorManager.getCreatureNodeName(rActor);
 	local sRecordSansModule = StringManager.split(sRecord, "@")[1];
 	local aRecordPathSansModule = StringManager.split(sRecordSansModule, ".");
@@ -115,35 +109,26 @@ function getRootCommander(rActor)
 	end
 	return nil;
 end
-
 --Returns nil for inactive identities and those owned by the GM
 function getControllingClient(nodeCT)
-	if not nodeCT then
-		Debug.console("DataOptionsKNK.getControllingClient - nodeCT doesn't exist");
-		return;
-	end
-	local sPCNode = nil;
+	local sPCNode;
 	local rActor = ActorManager.resolveActor(nodeCT);
 	local sNPCowner;
 	if ActorManager.isPC(rActor) then
 		sPCNode = ActorManager.getCreatureNodeName(rActor);
 	else
-		sNPCowner = DB.getValue(nodeCT, "NPCowner", "");
-		if sNPCowner == "" then
+		sNPCowner = DB.getValue(nodeCT, 'NPCowner', '');
+		if sNPCowner == '' then
 			if Pets and Pets.isCohort(rActor) then
 				sPCNode = getRootCommander(rActor);
-			else
-				if FriendZone and FriendZone.isCohort(rActor) then
-					sPCNode = getRootCommander(rActor);
-				end
 			end
 		end
 	end
 
 	if sPCNode or sNPCowner then
-		for _, value in pairs(User.getAllActiveIdentities()) do
+		for _,value in pairs(User.getAllActiveIdentities()) do
 			if sPCNode then
-				if "charsheet." .. value == sPCNode then
+				if 'charsheet.' .. value == sPCNode then
 					return User.getIdentityOwner(value);
 				end
 			end

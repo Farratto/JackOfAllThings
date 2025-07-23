@@ -4,10 +4,10 @@
 	attribution and copyright information.
 -->
 <root release="3.0" version="3">
-	<announcement text="Jack of All Things ~dev_version~ for 5E by MeAndUnique, Farratto, rhagelstrom." icon="JackOfAllThings_icon" font="emotefont" />
+	<announcement text="Jack of All Things ~v3.5.5-dev~ for 5E by MeAndUnique, Farratto, rhagelstrom." icon="JackOfAllThings_icon" font="emotefont" />
 	<properties>
 		<name>Feature: Jack of All Things</name>
-		<version>~dev_version~</version>
+		<version>~v-dev~</version>
 		<loadorder>151</loadorder>
 		<author>MeAndUnique</author>
 		<description>Adds support for adding actions to items and giving items to NPCs.</description>
@@ -48,8 +48,8 @@
 		<script name="PowerUpKNK">
 			function onInit()
 				if PowerUp then
-					PowerUp.registerExtension("Jack of All Things", "~dev_version~", {
-						['message'] = "~dev_version~: ~update_notes~"
+					PowerUp.registerExtension("Jack of All Things", "~v-dev~", {
+						['message'] = "~v-dev~: ~update_notes~"
 					});
 				end
 			end

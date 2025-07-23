@@ -1,12 +1,11 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
---luacheck: globals update onMenuSelection
+--luacheck: globals update onMenuSelection menuicon textres tabicon text
 
 function onInit()
-	if super and super.onInit then
-		super.onInit()
-	end
+	if super and super.onInit then super.onInit() end
+
 	if (text or textres) and menuicon and target and tabicon then
 		if textres then
 			registerMenuItem(Interface.getString("menu_switch_to_powers"), menuicon[1], 5);

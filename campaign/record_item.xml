@@ -7,9 +7,8 @@
 	<windowclass name="item" merge="join">
 		<script>
 			function onInit()
-				if super and super.onInit then
-					super.onInit();
-				end
+				if super and super.onInit then super.onInit() end
+
 				local nodeRecord = self.getDatabaseNode();
 				local isIdentifiedPath = nodeRecord.getPath("isidentified");
 				DB.addHandler(isIdentifiedPath, "onUpdate", onIdentifiedChanged);
@@ -18,9 +17,7 @@
 			function onClose()
 				local nodeRecord = self.getDatabaseNode();
 				DB.removeHandler(nodeRecord.getPath("isidentified"), "onUpdate", onIdentifiedChanged);
-				if super and super.onClose then
-					super.onClose();
-				end
+				if super and super.onClose then super.onClose() end
 			end
 			function onIdentifiedChanged(nodeIdentified)
 				local bIdentified = nodeIdentified.getValue() ~= 0;

@@ -3,7 +3,7 @@
 
 --luacheck: globals isRecord onCurrencyUpdate hideItemPowers
 
-local _tDefaultCurrencyPaths = { "coins" };
+--local _tDefaultCurrencyPaths = { "coins" };
 local bPC;
 
 function onInit()
@@ -36,7 +36,7 @@ function onClose()
 end
 
 function isRecord()
-	local sPath = getDatabaseNode.getPath();
+	--local sPath = getDatabaseNode.getPath();
 	return StringManager.startsWith("npc") or StringManager.startsWith("reference");
 end
 

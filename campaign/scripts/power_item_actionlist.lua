@@ -1,15 +1,13 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
---luacheck: globals onActionDeleted onAbilityChanged
+--luacheck: globals onActionDeleted onAbilityChanged update
 
 local bReadOnly = true;
 local bHideCast = true;
 
 function onInit()
-	if super and super.onInit then
-		super.onInit();
-	end
+	if super and super.onInit then super.onInit() end
 
 	local nodePower = window.getDatabaseNode();
 	DB.addHandler(nodePower.getPath("actions"), "onChildDeleted", onActionDeleted);
@@ -49,9 +47,7 @@ function onClose()
 	DB.removeHandler(DB.getPath(nodeChar, "powergroup"), "onChildDeleted", onAbilityChanged);
 	DB.removeHandler(DB.getPath(nodeChar, "powergroup.*.name"), "onUpdate", onAbilityChanged);
 
-	if super and super.onClose then
-		super.onClose();
-	end
+	if super and super.onClose then super.onClose() end
 end
 
 function onActionDeleted()

@@ -8,8 +8,10 @@
 --luacheck: globals updateDischargeCount showCarriedOrEquipped shouldShowItemPowers getItemGroupName
 --luacheck: globals beginCreatingItemGroup handleItemGroupCreation countCharges getActorResourceItem
 --luacheck: globals isChargeResource getCurrentChargeResource getAvailableChargeResource rollRecharge
---luacheck: globals getItemResourceChargeSetters addChargeResourceChangedHandler
+--luacheck: globals getItemResourceChargeSetters addChargeResourceChangedHandler EquippedEffectsManager
 --luacheck: globals removeChargeResourceChangedHandler
+--luacheck: globals FULL_RECHARGE_DAY_THRESHOLD RECHARGE_NONE RECHARGE_NORMAL RECHARGE_FULL ResourceManager
+--luacheck: globals DAWN_TIME_OF_DAY NOON_TIME_OF_DAY DUSK_TIME_OF_DAY MIDNIGHT_TIME_OF_DAY
 
 OOB_MSGTYPE_RECHARGE_ITEM = "rechargeitem";
 OOB_MSGTYPE_CREATE_ITEM_GROUP = "createitemgroup";
@@ -30,7 +32,7 @@ FULL_RECHARGE_DAY_THRESHOLD = 5;
 local getItemSourceTypeOriginal;
 local addEquippedSpellPCOriginal;
 
-local nodeItemBeingEquiped = nil;
+local nodeItemBeingEquiped; --luacheck: ignore 231
 local nPreviousDateInMinutes;
 
 -- Initialization
@@ -309,8 +311,8 @@ function rollRecharge(nodeItem, sRechargeAmount, sRechargeCount)
 		if DB.getValue(nodeItem, "rechargesingle") == 1 then
 			nCount = math.min(nCount, 1);
 		end
-		for index=1,nCount do
-			for count=1,(tonumber(sRechargeCount) or 1) do
+		for index=1,nCount do --luacheck:ignore 213
+			for count=1,(tonumber(sRechargeCount) or 1) do --luacheck:ignore 213
 				ActionsManager.roll(nodeItem.getChild("..."), nil, rechargeRoll, false);
 			end
 		end
@@ -395,7 +397,6 @@ function destroyDischargedItem(nodeItem, nChargeCount)
 	local nCount = DB.getValue(nodeItem, "count", 1) - 1;
 	local bDeleted = false;
 	if nCount == 0 and OptionsManager.getOption("IDLU") == "on" then
-Debug.printstack();
 		nodeItem.delete();
 		bDeleted = true
 	else

@@ -1,14 +1,12 @@
 -- Please see the license.txt file included with this distribution for
 -- attribution and copyright information.
 
---luacheck: globals onDetailsDragStart update
+--luacheck: globals onDetailsDragStart update onHover onHoverUpdate contents idelete ireorder
 
 local onDragStartOriginal;
 
 function onInit()
-	if super and super.onInit then
-		super.onInit();
-	end
+	if super and super.onInit then super.onInit() end
 
 	onDragStartOriginal = detail.onDragStart;
 	detail.onDragStart = onDetailsDragStart;
@@ -53,6 +51,6 @@ function onHover(bOnControl)
 	WindowManagerKNK.handleHoverReorder(self, bOnControl);
 end
 
-function onHoverUpdate(bOnControl)
+function onHoverUpdate(bOnControl) --luacheck: ignore 212
 	WindowManagerKNK.handleHoverReorder(self, true);
 end

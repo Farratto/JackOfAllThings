@@ -1,7 +1,7 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
--- luacheck: globals resetHealth
+--luacheck: globals resetHealth
 
 local resetHealthOriginal;
 

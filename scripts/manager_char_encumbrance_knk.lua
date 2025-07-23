@@ -4,30 +4,30 @@
 --luacheck: globals enableCharCurrencyHandlers disableCharCurrencyHandlers enableCurrencyHandlers
 --luacheck: globals disableCurrencyHandlers updateAllCharacters
 
-local enableCharCurrencyHandlersOriginal;
-local disableCharCurrencyHandlersOriginal;
-local updateAllCharactersOriginal
+--local enableCharCurrencyHandlersOriginal;
+--local disableCharCurrencyHandlersOriginal;
+local updateAllCharactersOriginal;
 
 function onInit()
-	enableCharCurrencyHandlersOriginal = CharEncumbranceManager.enableCharCurrencyHandlers;
-	CharEncumbranceManager.enableCharCurrencyHandlers = enableCharCurrencyHandlers;
+	--enableCharCurrencyHandlersOriginal = CharEncumbranceManager.enableCharCurrencyHandlers;
+	--CharEncumbranceManager.enableCharCurrencyHandlers = enableCharCurrencyHandlers;
 
-	disableCharCurrencyHandlersOriginal = CharEncumbranceManager.disableCharCurrencyHandlers;
-	CharEncumbranceManager.disableCharCurrencyHandlers = disableCharCurrencyHandlers;
+	--disableCharCurrencyHandlersOriginal = CharEncumbranceManager.disableCharCurrencyHandlers;
+	--CharEncumbranceManager.disableCharCurrencyHandlers = disableCharCurrencyHandlers;
 
 	updateAllCharactersOriginal = CharEncumbranceManager.updateAllCharacters;
 	CharEncumbranceManager.updateAllCharacters = updateAllCharacters;
 end
 
 function enableCharCurrencyHandlers()
-	enableCharCurrencyHandlersOriginal();
+	--enableCharCurrencyHandlersOriginal();
 	enableCurrencyHandlers("combattracker.list");
 	enableCurrencyHandlers("npc");
 	enableCurrencyHandlers("reference.npcdata");
 end
 
 function disableCharCurrencyHandlers()
-	disableCharCurrencyHandlersOriginal();
+	--disableCharCurrencyHandlersOriginal();
 	disableCurrencyHandlers("combattracker.list");
 	disableCurrencyHandlers("npc");
 	disableCurrencyHandlers("reference.npcdata");

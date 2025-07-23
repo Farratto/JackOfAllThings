@@ -5,12 +5,10 @@
 
 --luacheck: globals getCastValue adjustCounter onChargesChanged calculateTotal calculateUsed getTotalCharges canCast
 --luacheck: globals getChargesUsed onClickRelease onWheel onValueChanged maxslotperrow spacing update updateSlots
---luacheck: globals stateicons getPreparedValue setPreparedValue setCastValue
+--luacheck: globals stateicons getPreparedValue setPreparedValue setCastValue Combat_Automation
+--luacheck: globals fgetVarNumber getVarNumberJoaT
 
-local nodePower;
-local nodeItem;
-local nTotal;
-local nUsed;
+local nodePower, nodeItem, nTotal, nUsed;
 local bWheel = false;
 
 --local adjustCounterOriginal;
@@ -42,6 +40,7 @@ function onInit()
 
 	--adjustCounterOriginal = super.adjustCounter;
 	--super.adjustCounter = adjustCounter;
+
 	getCastValueOriginal = super.getCastValue;
 	super.getCastValue = getCastValue;
 
@@ -240,9 +239,15 @@ function onClickRelease(_, x, y)
 		end
 
 		if self and self.getCastValue() > nCurrent then
-			PowerManagerCore.usePower(window.getDatabaseNode());
+			if Combat_Automation then
+				PowerManagerKNK.fusePower(window.getDatabaseNode());
+			else
+				PowerManagerCore.usePower(window.getDatabaseNode());
+			end
 		end
 	end
+
+	if Combat_Automation and Combat_Automation.window then Combat_Automation.window = nil end
 
 	return true;
 end

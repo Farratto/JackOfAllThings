@@ -74,7 +74,7 @@ function onItemDeleted(nodeItem)
 	groupsForItems[nodeItem] = nil;
 end
 
-function onFilteredValueChanged(node)
+function onFilteredValueChanged(node) --luacheck: ignore 212
 	applyFilter();
 end
 

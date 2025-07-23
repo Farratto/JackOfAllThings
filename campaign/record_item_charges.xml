@@ -43,9 +43,7 @@
 							parameters[1].values[1] = parameters[1].values[1] .. "|daily";
 						end
 
-						if super and super.onInit then
-							super.onInit();
-						end
+						if super and super.onInit then super.onInit() end
 					end
 				</script>
 				<anchored to="rechargelabel" width="60" height="20">

@@ -1,7 +1,7 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
---luacheck: globals update onGroupChanged
+--luacheck: globals update onGroupChanged powergroup displaygroup
 
 function onInit()
 	powergroup.onValueChanged = onGroupChanged;

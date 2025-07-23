@@ -3,7 +3,7 @@
 
 --luacheck: globals onChargesChanged onGroupChanged onActionAdded onActionDeleted shouldShowToggle
 --luacheck: globals shouldShowMetaData updateToggle toggleDetail update onMenuSelection getDescription
---luacheck: globals usePower
+--luacheck: globals usePower metadata
 
 local bReadOnly;
 local bHideCast;

@@ -88,15 +88,13 @@
 		<script>
 			local nInitialWidth = 40;
 			function onInit()
-				if super and super.onInit then
-					super.onInit();
-				end
-				if castlabel then
-					nInitialWidth, _ = castlabel.getSize();
-				end
+				if super and super.onInit then super.onInit() end
+
+				if castlabel then nInitialWidth, _ = castlabel.getSize() end
 			end
 			function update(_, bHideCast)
 				if super and super.update then super.update() end
+
 				castbutton.setVisible(not bHideCast);
 				attackviewlabel.setVisible(not bHideCast);
 				attackbutton.setVisible(not bHideCast);

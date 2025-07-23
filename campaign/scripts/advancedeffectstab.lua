@@ -1,10 +1,10 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
+--luacheck: globals getTab setTab
+
 function onInit()
-	if super and super.onInit then
-		super.onInit();
-	end
+	if super and super.onInit then super.onInit() end
 
 	if EffectManagerADND then
 		local sSub, sDisplay = getTab(1);

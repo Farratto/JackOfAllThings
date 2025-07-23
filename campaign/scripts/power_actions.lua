@@ -1,7 +1,7 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
---luacheck: globals onLockChanged update onMenuSelection
+--luacheck: globals onLockChanged update onMenuSelection getControls
 
 function onInit()
 	local nodeRecord = getDatabaseNode();

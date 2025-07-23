@@ -63,7 +63,8 @@
 				<anchored position="insidetopleft" offset="5,2" width="20" height="20" />
 				<class>power</class>
 			</linkcontrol>
-			<string_textlistitem name="value">
+<!--			<string_textlistitem name="value"> -->
+			<string_listitem_underline_base name="value">
 				<anchored position="insidetopleft" offset="30,2">
 					<right />
 				</anchored>
@@ -73,7 +74,8 @@
 				<actortype>ct</actortype>
 				<actorpath>......</actorpath>
 				<script file="ct/scripts/ct_power.lua" />
-			</string_textlistitem>
+<!--			</string_textlistitem> -->
+			</string_listitem_underline_base>
 		</sheetdata>
 	</windowclass>
 </root>

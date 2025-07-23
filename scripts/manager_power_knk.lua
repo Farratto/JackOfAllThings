@@ -1,7 +1,7 @@
 -- Please see the license.html file included with this distribution for
 -- attribution and copyright information.
 
---luacheck: globals addPower resetPowers getPowerActorNode resetIntriguePowers addPower resetPowers
+--luacheck: globals addPower resetPowers getPowerActorNode resetIntriguePowers addPower resetPowers fusePower
 --luacheck: globals fillActionOrderGap adjustActionOrder
 
 local addPowerOriginal;
@@ -20,6 +20,8 @@ function onInit()
 
 	getPowerActorNodeOriginal = PowerManager5E.getPowerActorNode;
 	PowerManager5E.getPowerActorNode = getPowerActorNode;
+
+	fusePower = PowerManagerCore.usePower;
 
 	if PowerManagerKw then
 		resetIntriguePowersOriginal = PowerManagerKw.resetIntriguePowers;

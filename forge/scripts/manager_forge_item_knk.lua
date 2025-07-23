@@ -60,9 +60,9 @@ function forgeMagicItem(winForge)
 
 	winForgeActive = nil;
 	nodeJustAdded = nil;
-	local items = {};
-	local nItemIndex = 0;
-	local templates = {};
+	--local items = {};
+	--local nItemIndex = 0;
+	--local templates = {};
 end
 
 function addMagicItemToCampaign(rMagicItem)

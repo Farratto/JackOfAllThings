@@ -1,7 +1,7 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
---luacheck: globals onLockChanged update
+--luacheck: globals onLockChanged update onDrop bHideCast miscellaneous charges getControls
 
 bHideCast = true;
 
@@ -27,7 +27,8 @@ end
 function update(bLocked)
 	if bLocked == nil then bLocked = WindowManager.getReadOnlyState(getDatabaseNode()) end
 	for _,control in ipairs(getControls()) do
-		control.setReadOnly(bReadOnly);
+		--control.setReadOnly(bReadOnly);
+		control.setReadOnly(bLocked);
 		if control.update then control.update() end
 	end
 	powerlist_iadd.setVisible(not bLocked);

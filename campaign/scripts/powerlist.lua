@@ -18,7 +18,7 @@ function onMenuSelection(selection)
 	end
 end
 
-function update(bReadOnly)
+function update(bReadOnly) --luacheck: ignore 212
 	--if bReadOnly == nil then bReadOnly = WindowManager.getReadOnlyState(window.getDatabaseNode()) end
 	--setReadOnly(bReadOnly);
 	local bEditMode = (window.powerlist_iedit.getValue() == 1);
