@@ -41,6 +41,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* v3.5.5: Accomodations for FGU v4.8.0. JoAT no longer deletes items from inventory, but at least it doesn't throw errors.  Will attempt bring JoAT back up to full functionality at a later date.
 * v3.5.5: FIXED: negative interaction with Combat Automation extension. Started compatibility updates for FG v4.8.0.
 * v3.5.4: FIXED: broke item charges when fixing nil error from v3.5.3
 * v3.5.3: FIXED: nil error when destroying item
