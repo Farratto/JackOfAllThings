@@ -341,7 +341,7 @@ function onRechargeRoll(rSource, _, rRoll)
 	Comm.deliverChatMessage(rMessage);
 end
 
-function distributeCharges(nodeItem, nChargesToAdd)
+function distributeCharges(nodeItem, nChargesToAdd, bFromDestroy)
 	local nMax = DB.getValue(nodeItem, "prepared", 0) * DB.getValue(nodeItem, "count", 0);
 	for _,nodePower in pairs(DB.getChildren(nodeItem, "powers")) do
 		if nChargesToAdd == 0 then
@@ -365,7 +365,7 @@ function distributeCharges(nodeItem, nChargesToAdd)
 		end
 	end
 
-	handleItemChargesUsed(nodeItem)
+	if not bFromDestroy then handleItemChargesUsed(nodeItem) end
 end
 
 -- Discharging
@@ -393,7 +393,7 @@ function handleItemChargesUsed(nodeItem)
 end
 
 function destroyDischargedItem(nodeItem, nChargeCount)
-	distributeCharges(nodeItem, nChargeCount);
+	distributeCharges(nodeItem, nChargeCount, true);
 	local nCount = DB.getValue(nodeItem, "count", 1) - 1;
 	local bDeleted = false;
 	if nCount == 0 and OptionsManager.getOption("IDLU") == "on" then

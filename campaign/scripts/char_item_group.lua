@@ -159,9 +159,7 @@ function onFilteredValueChanged(node)
 		return;
 	end
 
-	if bClosing then
-		return;
-	end
+	if bClosing then return end
 
 	local nodeItem = DB.getChild(node, "..");
 	if name.getValue() == ItemPowerManager.getItemGroupName(nodeItem) then
