@@ -3,10 +3,10 @@
 
 --luacheck: globals setListId onMenuSelection addItem removeItem updateItem rebuildItemPowers updateLink
 --luacheck: globals shouldBeShown onFilter onFilteredValueChanged onPowerAdded onPowerRemoved onPowerListChanged
---luacheck: globals checkForSort
+--luacheck: globals checkForSort itemPowers visibleItems
 
-local itemPowers = {};
-local visibleItems = {};
+itemPowers = {};
+visibleItems = {};
 local bClosing = false;
 
 -- Initialization
@@ -72,7 +72,7 @@ function removeItem(nodeItem)
 		end
 		if (nCount == 0) and (name.getValue() ~= "<< Unnamed Items >>") then
 			getDatabaseNode().delete();
-			bClosing  = true;
+			bClosing = true;
 		else
 			updateLink();
 		end

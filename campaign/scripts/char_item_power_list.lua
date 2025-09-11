@@ -2,12 +2,12 @@
 -- attribution and copyright information.
 
 --luacheck: globals onFilter onGroupNamed onItemAdded onItemDeleted onFilteredValueChanged onNameChanged
---luacheck: globals onDisplayGroupChanged setItemGroup initializeItemGroup
+--luacheck: globals onDisplayGroupChanged setItemGroup initializeItemGroup groupsForItems
 
 local nListId = 0;
 local nodeChar;
 local itemGroups = {};
-local groupsForItems = {};
+groupsForItems = {};
 local pendingItemsByGroupName = {};
 local pendingItemsByItemNode = {};
 

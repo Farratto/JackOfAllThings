@@ -357,19 +357,20 @@ function distributeCharges(nodeItem, nChargesToAdd, bFromDestroy)
 				else
 					nChargesToAdd = 0;
 				end
-				DB.setValue(nodePower, "cast", "number", nCast);
+				if not bFromDestroy then DB.setValue(nodePower, "cast", "number", nCast) end
 			elseif nCast > 0 then
 				nChargesToAdd = nChargesToAdd - nCast;
-				DB.setValue(nodePower, "cast", "number", 0);
+				if not bFromDestroy then DB.setValue(nodePower, "cast", "number", 0) end
 			end
 		end
 	end
 
-	if not bFromDestroy then handleItemChargesUsed(nodeItem) end
+	handleItemChargesUsed(nodeItem, bFromDestroy);
 end
 
 -- Discharging
-function handleItemChargesUsed(nodeItem)
+--called by JackOfAllThings/campaign/scripts/counter_item_power.lua.onValueChanged()
+function handleItemChargesUsed(nodeItem, bFromDestroy)
 	local nChargeCount = DB.getValue(nodeItem, "prepared", 1);
 	local nChargesUsed = countCharges(nodeItem);
 	local nCurrentDischargeCount = DB.getValue(nodeItem, "discharged", 0);
@@ -381,23 +382,53 @@ function handleItemChargesUsed(nodeItem)
 			ChatManager.Message(DB.getValue(nodeItem, "name", "Unnamed Item") .. " - Item destroyed on discharge.",
 				true,
 				ActorManager.resolveActor(nodeItem));
-			bDeleted = destroyDischargedItem(nodeItem, nChargeCount);
+			if not bFromDestroy then bDeleted = destroyDischargedItem(nodeItem, nChargeCount) end
 		elseif sOnDischarge == "roll" then
 			beginRollDischargedItem(nodeItem);
 		end
 	end
 
 	if not bDeleted then
-		updateDischargeCount(nodeItem, nChargeCount);
+		updateDischargeCount(nodeItem, nChargeCount, bFromDestroy);
 	end
 end
 
-function destroyDischargedItem(nodeItem, nChargeCount)
-	distributeCharges(nodeItem, nChargeCount, true);
+function destroyDischargedItem(nodeItem)
+--function destroyDischargedItem(nodeItem, nChargeCount)
+	--distributeCharges(nodeItem, nChargeCount, true);
 	local nCount = DB.getValue(nodeItem, "count", 1) - 1;
 	local bDeleted = false;
-	if nCount == 0 and OptionsManager.getOption("IDLU") == "on" then
-		nodeItem.delete();
+	--if true == false and nCount == 0 and OptionsManager.getOption("IDLU") == "on" then
+	if nCount <= 0 and OptionsManager.getOption("IDLU") == "on" then
+		DB.setValue(nodeItem, 'carried', 'number', 0);
+		--[[local wChar = Interface.findWindow('charsheet', DB.getChild(nodeItem, '...'));
+		if wChar then
+			local wTab = wChar.actions and wChar.actions.subwindow;
+			if wTab then
+				local windowGroup;
+				local wTabSubContent = wTab.content.subwindow;
+				if wTabSubContent.item_actions_top then
+					windowGroup = wTabSubContent.item_actions_top.subwindow.list.groupsForItems[nodeItem];
+				end
+				if not windowGroup and wTabSubContent.item_actions then
+					windowGroup = wTabSubContent.item_actions.subwindow.list.groupsForItems[nodeItem];
+				end
+				if windowGroup and type(windowGroup) == "windowinstance" then
+					windowGroup.visibleItems[nodeItem] = false;
+					windowGroup.powerlist.applyFilter();
+					windowGroup.windowlist.applyFilter();
+					windowGroup.updateLink();
+					if windowGroup.itemPowers[nodeItem] then
+						for _,powerWindow in ipairs(windowGroup.itemPowers[nodeItem]) do
+							powerWindow.close();
+						end
+						windowGroup.itemPowers[nodeItem] = nil;
+					end
+				end
+			end
+		end]]
+		DB.setValue(nodeItem, 'count', 'number', 0);
+		--nodeItem.delete();
 		bDeleted = true
 	else
 		DB.setValue(nodeItem, "count", "number", nCount);
@@ -463,9 +494,13 @@ function rechargeDischargedItem(nodeItem)
 	ActionsManager.roll(nodeItem.getChild("..."), nil, rechargeRoll, false);
 end
 
-function updateDischargeCount(nodeItem, nChargeCount)
+function updateDischargeCount(nodeItem, nChargeCount, bFromDestroy)
 	if type(nodeItem) == "databasenode" then
-		DB.setValue(nodeItem, "discharged", "number", math.floor(countCharges(nodeItem) / nChargeCount));
+		if bFromDestroy then
+			DB.setValue(nodeItem, "discharged", "number", 0);
+		else
+			DB.setValue(nodeItem, "discharged", "number", math.floor(countCharges(nodeItem) / nChargeCount));
+		end
 	end
 end
 

@@ -10,15 +10,11 @@ local nTotal;
 local nUsed;
 local bWheel = false;
 
-local adjustCounterOriginal;
---local getCastValueOriginal;
+--local adjustCounterOriginal;
 
--- Initialization
 function onInit()
-	adjustCounterOriginal = super.adjustCounter;
-	super.adjustCounter = adjustCounter;
-	--getCastValueOriginal = super.getCastValue;
-	--super.getCastValue = getCastValue;
+	--adjustCounterOriginal = super.adjustCounter;
+	--super.adjustCounter = adjustCounter;
 
 	if super and super.onInit then super.onInit() end
 
@@ -43,13 +39,6 @@ function onClose()
 	if super and super.onClose then super.onClose() end
 end
 
---[[function getCastValue()
-	if type(window) == "windowinstance" then
-		return getCastValueOriginal();
-	end
-	return 0;
-end]]
-
 function onWheel(notches)
 	bWheel = true;
 	local result = super.onWheel(notches);
@@ -57,7 +46,7 @@ function onWheel(notches)
 	return result;
 end
 
-function adjustCounter(val_adj)
+function adjustCounter(val_adj, ...)
 	if not bWheel and DB.getValue(nodePower, "chargeperiod", "") == "" then
 		if val_adj == 1 then
 			val_adj = DB.getValue(nodePower, "charges", 1);
@@ -65,23 +54,32 @@ function adjustCounter(val_adj)
 			val_adj = val_adj * DB.getValue(nodePower, "charges", 1);
 		end
 	end
-	adjustCounterOriginal(val_adj);
+	--adjustCounterOriginal(val_adj);
+	if super and super.adjustCounter then super.adjustCounter(val_adj, ...) end
 end
 
 function onChargesChanged()
 	calculateTotal();
 	calculateUsed();
 
-	local nodePower = getDatabaseNode();
-	DB.setValue(nodePower, "prepared", "number", nTotal);
+	if OptionsManager.getOption('IDLU') == 'on'
+		and DB.getValue(nodeItem, 'prepared', 1) == 1
+		and DB.getValue(nodeItem, 'dischargeaction', '') == 'destroy'
+	then
+		DB.setValue(nodePower, 'cast', 'number', 0);
+		nUsed = 0;
+	end
 	if super and super.update then super.update("standard", true, nTotal, nUsed, nTotal) end
 end
 
 function onValueChanged()
 	ItemPowerManager.handleItemChargesUsed(nodeItem);
+
 end
 
 function calculateTotal()
+	if not nodePower or type(nodePower) ~= 'databasenode' then return end
+
 	local nCharges = DB.getValue(nodePower, "charges", 0);
 	if nCharges > 0 then
 		if DB.getValue(nodePower, "chargeperiod", "") == "" then
@@ -95,6 +93,8 @@ function calculateTotal()
 end
 
 function calculateUsed()
+	if not nodePower or type(nodePower) ~= 'databasenode' then return end
+
 	if DB.getValue(nodePower, "chargeperiod", "") == "" then
 		nUsed = ItemPowerManager.countCharges(nodeItem);
 	else
