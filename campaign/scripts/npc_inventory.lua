@@ -37,6 +37,7 @@ end
 
 function isRecord()
 	--local sPath = getDatabaseNode.getPath();
+	--StringManager.startsWith does use patterns
 	return StringManager.startsWith("npc") or StringManager.startsWith("reference");
 end
 

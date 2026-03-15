@@ -86,6 +86,7 @@ function getItemSourceType(vNode)
 		end
 
 		if sNodePath then
+			--StringManager.startsWith does use patterns
 			if StringManager.startsWith(sNodePath, "combattracker") then
 				return "charsheet";
 			end
