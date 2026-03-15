@@ -44,6 +44,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 * v3.5.9: Removed double-clicking enemy creatures as was incorporated into ruleset
 * v3.5.9: Removed double-clicking enemy creatures as was incorporated into ruleset
 * v3.5.9: Removed double-clicking enemy creatures as was incorporated into ruleset
+* v3.5.9: Removed double-clicking enemy creatures as was incorporated into ruleset
 * v3.5.8: FIXED: single use items now reflecting correctly in actions tab. Minor performance improvements.
 * v3.5.7: FIXED: FG v4.8.2 broke the charges on items.
 * v3.5.6: Accomodations for FGU v4.8.0. JoAT no longer deletes items from inventory, but at least it doesn't throw errors.  Will attempt bring JoAT back up to full functionality at a later date.
