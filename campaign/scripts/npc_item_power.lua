@@ -106,5 +106,5 @@ function getHealValue(rAction)
 end
 
 function getEffectValue(rAction)
-	return EffectManager5E.encodeEffectForCT(rAction);
+	return EffectManagerD20.encodeEffectForCT(rAction);
 end
