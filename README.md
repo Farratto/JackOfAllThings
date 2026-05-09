@@ -41,10 +41,8 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
-* v3.5.10: Accomodations for ruleset 2026-04-28
-* v3.5.9: Removed double-clicking enemy creatures as was incorporated into ruleset
-* v3.5.9: Removed double-clicking enemy creatures as was incorporated into ruleset
-* v3.5.9: Removed double-clicking enemy creatures as was incorporated into ruleset
+* v3.5.11: FIXED: long-standing erroneous options set to local.  Accomodations for ruleset 2026-05-05
+* v3.5.10: Accomodations for ruleset 2026-05-05
 * v3.5.9: Removed double-clicking enemy creatures as was incorporated into ruleset
 * v3.5.8: FIXED: single use items now reflecting correctly in actions tab. Minor performance improvements.
 * v3.5.7: FIXED: FG v4.8.2 broke the charges on items.

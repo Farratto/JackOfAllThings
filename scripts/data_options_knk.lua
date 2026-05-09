@@ -25,20 +25,17 @@ end
 
 function registerOptions()
 	-- Remove item from inventory when destoyed
-	OptionsManager.registerOption2("IDLU", true, "option_header_knk", "option_label_IDLU", "option_entry_cycler",
+	OptionsManager.registerOption2("IDLU", false, "option_header_knk", "option_label_IDLU", "option_entry_cycler",
 		{ labels = "option_val_on", values = "on", baselabel = "option_val_off", baseval = "off", default = "off" });
-	OptionsManager.registerOption2("SCIP", true, "option_header_knk", "option_label_SCIP", "option_entry_cycler",
+	OptionsManager.registerOption2("SCIP", false, "option_header_knk", "option_label_SCIP", "option_entry_cycler",
 		{ labels = "option_val_on", values = "on", baselabel = "option_val_off", baseval = "off", default = "off" });
-	OptionsManager.registerOption2("IPAE", true, "option_header_knk", "option_label_IPAE", "option_entry_cycler",
+	OptionsManager.registerOption2("IPAE", false, "option_header_knk", "option_label_IPAE", "option_entry_cycler",
 		{ labels = "option_label_disable", values = "off", baselabel = "option_label_enable", baseval = "on", default = "on" });
 	-- ASED option to be used at a later date.
-	-- OptionsManager.registerOption2("ASED", true, "option_header_knk", "option_label_ASED", "option_entry_cycler",
+	-- OptionsManager.registerOption2("ASED", false, "option_header_knk", "option_label_ASED", "option_entry_cycler",
 	-- 	{ labels = "option_val_on", values = "on", baselabel = "option_val_off", baseval = "off", default = "off" });
 	OptionsManager.registerOptionData({	sKey = 'AOTW', bLocal = true, sGroupRes = 'option_header_knk' });
 	OptionsManager.registerOptionData({	sKey = 'ACTW', bLocal = true, sGroupRes = 'option_header_knk' });
-	OptionsManager.registerOptionData({	sKey = 'AUTO_SHARE_PICS', sGroupRes = 'option_header_knk', tCustom = {
-		default = "on" }
-	});
 end
 
 function hasExtension(sExtName)

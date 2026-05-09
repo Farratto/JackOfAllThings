@@ -1,16 +1,21 @@
 -- Please see the LICENSE.txt file included with this distribution for
 -- attribution and copyright information.
 
---luacheck: globals resetHealth
+--luacheck: globals resetHealthKNK fresetHealth
 
-local resetHealthOriginal;
+fresetHealth = nil;
 
 function onInit()
-	resetHealthOriginal = CombatManager2.resetHealth;
-	CombatManager2.resetHealth = resetHealth;
+	fresetHealth = ActorCommonManager.resetHealth;
+	ActorCommonManager.resetHealth = resetHealthKNK;
 end
 
-function resetHealth(nodeCT, bLong)
-	resetHealthOriginal(nodeCT, bLong);
+function resetHealthKNK(rActor, sRestType, ...)
+	fresetHealth(rActor, sRestType, ...);
+
+	local bLong;
+	if sRestType == 'long' then bLong = true end
+	local nodeCT = ActorManager.getCTNode(rActor);
+
 	ItemPowerManager.beginRecharging(nodeCT, bLong);
 end
