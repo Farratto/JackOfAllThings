@@ -4,7 +4,7 @@
 	attribution and copyright information.
 -->
 <root release="3.0" version="3">
-	<announcement text="Jack of All Things ~v3.5.11-dev~ for 5E by MeAndUnique, Farratto, rhagelstrom." icon="JackOfAllThings_icon" font="emotefont" />
+	<announcement text="Jack of All Things ~v3.5.12-dev~ for 5E by MeAndUnique, Farratto, rhagelstrom." icon="JackOfAllThings_icon" font="emotefont" />
 	<properties>
 		<name>Feature: Jack of All Things</name>
 		<version>~v-dev~</version>
@@ -17,7 +17,7 @@
 	</properties>
 	<base>
 		<script name="ActorManagerKNK" file="scripts/manager_actor_KNK.lua" />
-		<script name="CharEncumbranceManagerKNK" file="scripts/manager_char_encumbrance_knk.lua" />
+<!--		<script name="CharEncumbranceManagerKNK" file="scripts/manager_char_encumbrance_knk.lua" /> -->
 		<script name="DataOptionsKNK" file="scripts/data_options_knk.lua" />
 		<script name="ForgeManagerItemKNK" file="forge/scripts/manager_forge_item_knk.lua" />
 		<script name="ItemManagerKNK" file="scripts/manager_item_knk.lua" />

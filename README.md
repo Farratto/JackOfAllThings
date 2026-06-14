@@ -41,6 +41,7 @@ Icons made by [sbed](https://opengameart.org/users/sbed) and [Delapouite](https:
 
 ### Change Log
 
+* v3.5.12: FIXED: Was inhibiting new encumbrance system in ruleset. Added protections for future ruleset changes to effects.
 * v3.5.11: FIXED: long-standing erroneous options set to local.  Accomodations for ruleset 2026-05-05
 * v3.5.10: Accomodations for ruleset 2026-05-05
 * v3.5.9: Removed double-clicking enemy creatures as was incorporated into ruleset

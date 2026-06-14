@@ -19,19 +19,21 @@ function onInit()
 	CharEncumbranceManager.updateAllCharacters = updateAllCharacters;
 end
 
+--[[
 function enableCharCurrencyHandlers()
 	--enableCharCurrencyHandlersOriginal();
-	enableCurrencyHandlers("combattracker.list");
+	enableCurrencyHandlers(CombatManager.CT_COMBATANT_PARENT);
 	enableCurrencyHandlers("npc");
 	enableCurrencyHandlers("reference.npcdata");
 end
 
 function disableCharCurrencyHandlers()
 	--disableCharCurrencyHandlersOriginal();
-	disableCurrencyHandlers("combattracker.list");
+	disableCurrencyHandlers(CombatManager.CT_COMBATANT_PARENT);
 	disableCurrencyHandlers("npc");
 	disableCurrencyHandlers("reference.npcdata");
 end
+]]
 
 function enableCurrencyHandlers(sRoot)
 	local tItemLists = ItemManager.getInventoryPaths(sRoot);

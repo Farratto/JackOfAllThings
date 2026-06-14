@@ -9,7 +9,7 @@ function onInit()
 		"inventorylist",
 		"cohorts.*.inventorylist",
 	});
-	ItemManager.setInventoryPaths("combattracker.list",
+	ItemManager.setInventoryPaths(CombatManager.getTrackerPath(),
 	{
 		"inventorylist",
 		"cohorts.*.inventorylist",
